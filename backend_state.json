@@ -116,11 +116,11 @@
       "phone": "919876543210",
       "ig_user_id": "3281055415414316",
       "tags": [
+        "Keyword Matched: HI",
         "Instagram DM",
-        "Live Interaction",
         "Chat with Us"
       ],
-      "notes": "Real customer commented 'Hi' on Reel #18079, received DM offer card, and tapped the 'Chat with Us' action button.",
+      "notes": "Customer commented keyword 'HI' on Reel #18079. Bot automatically sent WhatsApp handoff card. Customer tapped 'Chat with Us' action button.",
       "chat": [
         {
           "from": "user",
@@ -145,117 +145,6 @@
       ]
     },
     {
-      "id": 1754390998968975,
-      "handle": "@_jaxsuxya_09",
-      "name": "Jayasurya",
-      "followers": "Real IG Customer",
-      "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRfMTk5NTA4ODMzMjk2NzI0MzkzMDg3ODM1MTkyMTE2MjI0NzI0NDg4IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzgzM0FCNCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRDFEMUQiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSJ1cmwoI2dyYWRfMTk5NTA4ODMzMjk2NzI0MzkzMDg3ODM1MTkyMTE2MjI0NzI0NDg4KSIvPgogIDx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sQmxpbmtNYWNTeXN0ZW1Gb250LCdTZWdvZSBVSScsUm9ib3RvLEhlbHZldGljYSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjQ2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCI+SjwvdGV4dD4KPC9zdmc+",
-      "source": "ig",
-      "intent": "High Intent",
-      "lastMsg": "Commented \"\ud83d\ude4c\u2764\ufe0f\" on Reel #18079",
-      "time": "Just now",
-      "reel": "@sreee._.ram Reel #18079",
-      "phone": "919876543210",
-      "ig_user_id": "1754390998968975",
-      "tags": [
-        "Inbound Lead",
-        "Reel Comment",
-        "Verified User"
-      ],
-      "notes": "Customer commented '\ud83d\ude4c\u2764\ufe0f' on @sreee._.ram Reel #18079. Automated reply sent and direct WhatsApp handoff offer delivered in DM.",
-      "chat": [
-        {
-          "from": "user",
-          "text": "\ud83d\ude4c\u2764\ufe0f",
-          "time": "Just now"
-        },
-        {
-          "from": "bot",
-          "text": "DM sent! Tap inside to order directly with zero fees.",
-          "time": "Just now"
-        },
-        {
-          "from": "bot",
-          "text": "Hey @_jaxsuxya_09! Thanks for checking out our post on @sreee._.ram. Tap below to order on WhatsApp with zero fees: https://wa.me/919876543210",
-          "time": "Just now"
-        }
-      ]
-    },
-    {
-      "id": 2347184246018908,
-      "handle": "@gousickhawk",
-      "name": "Gousick Hawk",
-      "followers": "Real IG Customer",
-      "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRfMTM2MDA3NzEyNjg4MzgyODUwMzUzMjY5NjI0MTU0Njg3MTkzMTUiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDU5NjY5Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzEwQjk4MSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9InVybCgjZ3JhZF8xMzYwMDc3MTI2ODgzODI4NTAzNTMyNjk2MjQxNTQ2ODcxOTMxNSkiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLFJvYm90byxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPkc8L3RleHQ+Cjwvc3ZnPg==",
-      "source": "ig",
-      "intent": "High Intent",
-      "lastMsg": "Commented \"\u2764\ufe0f\u2764\ufe0f\u2764\ufe0f\ud83d\udd25\" on Reel #18027",
-      "time": "4m ago",
-      "reel": "@sreee._.ram Reel #18027",
-      "phone": "919876543210",
-      "ig_user_id": "2347184246018908",
-      "tags": [
-        "Instagram Lead",
-        "Hot Inquiry",
-        "Ready to Buy"
-      ],
-      "notes": "Customer commented '\u2764\ufe0f\u2764\ufe0f\u2764\ufe0f\ud83d\udd25' on Reel #18027. Instant WhatsApp order bridge link sent with 15% discount.",
-      "chat": [
-        {
-          "from": "user",
-          "text": "\u2764\ufe0f\u2764\ufe0f\u2764\ufe0f\ud83d\udd25",
-          "time": "4m ago"
-        },
-        {
-          "from": "bot",
-          "text": "DM sent with details and order link!",
-          "time": "4m ago"
-        },
-        {
-          "from": "bot",
-          "text": "Awesome @gousickhawk! Tap below to complete your order directly through WhatsApp: https://wa.me/919876543210?text=Hi%21%20I%20am%20messaging%20from%20Instagram%20%40gousickhawk%20to%20order%20Featured%20Item%20%2318027%21",
-          "time": "4m ago"
-        }
-      ]
-    },
-    {
-      "id": 1419294913650985,
-      "handle": "@__vickiyyy__",
-      "name": "Vicky",
-      "followers": "Real IG Customer",
-      "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRfMTc5MjkzMzU4NDk0NjgwODk0NTU3NjQ3MjUxMDE5MTA1MDcwMzEiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDg5MUIyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzA2QjZENCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9InVybCgjZ3JhZF8xNzkyOTMzNTg0OTQ2ODA4OTQ1NTc2NDcyNTEwMTkxMDUwNzAzMSkiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLFJvYm90byxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPlY8L3RleHQ+Cjwvc3ZnPg==",
-      "source": "ig",
-      "intent": "High Intent",
-      "lastMsg": "Commented \"\ud83e\udec2\u2764\ufe0f\u200d\ud83d\udd25\" on Post #17863",
-      "time": "12m ago",
-      "reel": "@sreee._.ram Post #17863",
-      "phone": "919876543210",
-      "ig_user_id": "1419294913650985",
-      "tags": [
-        "Inbound Lead",
-        "Post Comment",
-        "Verified User"
-      ],
-      "notes": "Customer commented '\ud83e\udec2\u2764\ufe0f\u200d\ud83d\udd25' on Post #17863.",
-      "chat": [
-        {
-          "from": "user",
-          "text": "\ud83e\udec2\u2764\ufe0f\u200d\ud83d\udd25",
-          "time": "12m ago"
-        },
-        {
-          "from": "bot",
-          "text": "Check your DM! Details sent.",
-          "time": "12m ago"
-        },
-        {
-          "from": "bot",
-          "text": "Hey @__vickiyyy__! Thanks for checking out our post on @sreee._.ram. Tap below for details: https://wa.me/919876543210",
-          "time": "12m ago"
-        }
-      ]
-    },
-    {
       "id": 1618985113297064,
       "handle": "@isiddd_",
       "name": "Isiddd",
@@ -269,11 +158,10 @@
       "phone": "919876543210",
       "ig_user_id": "1618985113297064",
       "tags": [
-        "Instagram DM",
-        "Direct Chat",
-        "Active Customer"
+        "Direct DM",
+        "Instagram Chat"
       ],
-      "notes": "Active conversation on Instagram DM.",
+      "notes": "Direct inbound DM conversation from Instagram inbox.",
       "chat": [
         {
           "from": "user",
@@ -291,47 +179,83 @@
           "time": "05:43 AM"
         }
       ]
+    },
+    {
+      "id": 3402823668417103,
+      "handle": "@dude._.___",
+      "name": "Dude",
+      "followers": "Real IG Customer",
+      "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRfMzE0NjQxMzgyOTA2MDgzNzQ5NTQyODA5MDI2ODEwNjExOTQ5NzEiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDU5NjY5Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzEwQjk4MSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9InVybCgjZ3JhZF8zMTQ2NDEzODI5MDYwODM3NDk1NDI4MDkwMjY4MTA2MTE5NDk3MSkiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLFJvYm90byxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPkQ8L3RleHQ+Cjwvc3ZnPg==",
+      "source": "ig",
+      "intent": "High Intent",
+      "lastMsg": "Allu kuda irukan nu sona da",
+      "time": "1h ago",
+      "reel": "@sreee._.ram Reel #18079",
+      "phone": "919876543210",
+      "ig_user_id": "3402823668417103",
+      "tags": [
+        "Direct DM",
+        "Instagram Chat"
+      ],
+      "notes": "Direct inbound DM conversation from Instagram inbox.",
+      "chat": [
+        {
+          "from": "user",
+          "text": "Allu kuda irukan nu sona da",
+          "time": "08:43 AM"
+        },
+        {
+          "from": "user",
+          "text": "Chennai la irukanu sona",
+          "time": "08:44 AM"
+        },
+        {
+          "from": "user",
+          "text": "Call panna",
+          "time": "08:45 AM"
+        }
+      ]
     }
   ],
   "activities": [
     {
       "user": "@gym_flow_offical",
-      "action": "Tapped \"Chat with Us\" action button in DM",
+      "action": "Tapped \"Chat with Us\" button in DM",
       "time": "Just now",
-      "badge": "Button Clicked",
+      "badge": "Button Tapped",
       "badgeClass": "badge-blue",
       "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRfMjAwMjc0NzAzOTUyODA5NzAxODk4MTAwMjQ0MzcxOTY1ODM3MDAyIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAyODRDNyIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyNTYzRUIiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSJ1cmwoI2dyYWRfMjAwMjc0NzAzOTUyODA5NzAxODk4MTAwMjQ0MzcxOTY1ODM3MDAyKSIvPgogIDx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sQmxpbmtNYWNTeXN0ZW1Gb250LCdTZWdvZSBVSScsUm9ib3RvLEhlbHZldGljYSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjQ2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCI+RzwvdGV4dD4KPC9zdmc+"
     },
     {
       "user": "@gym_flow_offical",
-      "action": "Sent DM \"Hi\"",
+      "action": "Commented \"Hi\" (Matched keyword #HI on Reel #18079)",
       "time": "30m ago",
-      "badge": "DM Replied",
+      "badge": "Keyword Matched",
       "badgeClass": "badge-blue",
       "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRfMjAwMjc0NzAzOTUyODA5NzAxODk4MTAwMjQ0MzcxOTY1ODM3MDAyIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAyODRDNyIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyNTYzRUIiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSJ1cmwoI2dyYWRfMjAwMjc0NzAzOTUyODA5NzAxODk4MTAwMjQ0MzcxOTY1ODM3MDAyKSIvPgogIDx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sQmxpbmtNYWNTeXN0ZW1Gb250LCdTZWdvZSBVSScsUm9ib3RvLEhlbHZldGljYSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjQ2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCI+RzwvdGV4dD4KPC9zdmc+"
     },
     {
       "user": "@_jaxsuxya_09",
-      "action": "Commented \"\ud83d\ude4c\u2764\ufe0f\" on @sreee._.ram Reel #18079",
+      "action": "Commented \"\ud83d\ude4c\u2764\ufe0f\" on Reel #18079 (No keyword matched \u2014 Skipped)",
       "time": "1h ago",
-      "badge": "Auto-Replied",
-      "badgeClass": "badge-blue",
+      "badge": "No Keyword",
+      "badgeClass": "badge-grey",
       "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRfMTk5NTA4ODMzMjk2NzI0MzkzMDg3ODM1MTkyMTE2MjI0NzI0NDg4IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzgzM0FCNCIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGRDFEMUQiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSJ1cmwoI2dyYWRfMTk5NTA4ODMzMjk2NzI0MzkzMDg3ODM1MTkyMTE2MjI0NzI0NDg4KSIvPgogIDx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sQmxpbmtNYWNTeXN0ZW1Gb250LCdTZWdvZSBVSScsUm9ib3RvLEhlbHZldGljYSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjQ2IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCI+SjwvdGV4dD4KPC9zdmc+"
     },
     {
       "user": "@gousickhawk",
-      "action": "Commented \"\u2764\ufe0f\u2764\ufe0f\u2764\ufe0f\ud83d\udd25\" on @sreee._.ram Reel #18027",
+      "action": "Commented \"\u2764\ufe0f\u2764\ufe0f\u2764\ufe0f\ud83d\udd25\" on Reel #18027 (No keyword matched \u2014 Skipped)",
       "time": "2h ago",
-      "badge": "Auto-Replied",
-      "badgeClass": "badge-blue",
+      "badge": "No Keyword",
+      "badgeClass": "badge-grey",
       "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRfMTM2MDA3NzEyNjg4MzgyODUwMzUzMjY5NjI0MTU0Njg3MTkzMTUiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDU5NjY5Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzEwQjk4MSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9InVybCgjZ3JhZF8xMzYwMDc3MTI2ODgzODI4NTAzNTMyNjk2MjQxNTQ2ODcxOTMxNSkiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLFJvYm90byxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPkc8L3RleHQ+Cjwvc3ZnPg=="
     },
     {
       "user": "@__vickiyyy__",
-      "action": "Commented \"\ud83e\udec2\u2764\ufe0f\u200d\ud83d\udd25\" on @sreee._.ram Post #17863",
+      "action": "Commented \"\ud83e\udec2\u2764\ufe0f\u200d\ud83d\udd25\" on Post #17863 (No keyword matched \u2014 Skipped)",
       "time": "3h ago",
-      "badge": "Auto-Replied",
-      "badgeClass": "badge-blue",
+      "badge": "No Keyword",
+      "badgeClass": "badge-grey",
       "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRfMTc5MjkzMzU4NDk0NjgwODk0NTU3NjQ3MjUxMDE5MTA1MDcwMzEiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDg5MUIyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzA2QjZENCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9InVybCgjZ3JhZF8xNzkyOTMzNTg0OTQ2ODA4OTQ1NTc2NDcyNTEwMTkxMDUwNzAzMSkiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLFJvYm90byxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPlY8L3RleHQ+Cjwvc3ZnPg=="
     }
   ],

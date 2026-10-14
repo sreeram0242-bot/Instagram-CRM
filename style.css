@@ -1648,6 +1648,182 @@ body {
 }
 
 /* ==========================================================================
+   IN-DM 12-STEP FLOWCHART VISUALIZER & SIMULATOR CONTROLS
+   ========================================================================== */
+.sim-mode-toolbar {
+    display: flex;
+    background: #E2E8F0;
+    padding: 4px;
+    border-radius: var(--radius-md);
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.sim-mode-btn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: var(--grey-600);
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.sim-mode-btn:hover {
+    color: var(--grey-900);
+}
+
+.sim-mode-btn.active {
+    background: #FFFFFF;
+    color: var(--blue-600);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Flowchart Diagram Card */
+.flowchart-diagram-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    box-shadow: var(--shadow-sm);
+}
+
+.flowchart-steps-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.flowchart-step-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--grey-50);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    transition: var(--transition);
+}
+
+.flowchart-step-row:hover {
+    background: #FFFFFF;
+    border-color: var(--blue-300);
+    box-shadow: 0 2px 8px rgba(37,99,235,0.06);
+}
+
+.flowchart-step-row.step-bot {
+    border-left: 4px solid var(--blue-600);
+}
+
+.flowchart-step-row.step-user {
+    border-left: 4px solid #10B981;
+}
+
+.flowchart-step-row.step-success {
+    border-left: 4px solid #8B5CF6;
+    background: #F5F3FF;
+}
+
+.flowchart-node-badge {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.76rem;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.flowchart-node-badge.badge-a { background: #DBEAFE; color: #1D4ED8; }
+.flowchart-node-badge.badge-b { background: #DBEAFE; color: #1D4ED8; }
+.flowchart-node-badge.badge-c { background: #D1FAE5; color: #047857; }
+.flowchart-node-badge.badge-d { background: #DBEAFE; color: #1D4ED8; }
+.flowchart-node-badge.badge-e { background: #D1FAE5; color: #047857; }
+.flowchart-node-badge.badge-f { background: #DBEAFE; color: #1D4ED8; }
+.flowchart-node-badge.badge-g { background: #D1FAE5; color: #047857; }
+.flowchart-node-badge.badge-h { background: #DBEAFE; color: #1D4ED8; }
+.flowchart-node-badge.badge-i { background: #D1FAE5; color: #047857; }
+.flowchart-node-badge.badge-j { background: #DBEAFE; color: #1D4ED8; }
+.flowchart-node-badge.badge-k { background: #D1FAE5; color: #047857; }
+.flowchart-node-badge.badge-l { background: #EDE9FE; color: #6D28D9; }
+.flowchart-node-badge.badge-m { background: #FEF3C7; color: #B45309; }
+
+.flowchart-connector-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 14px;
+    color: var(--grey-400);
+}
+
+.flowchart-pill-btn {
+    border: 1px solid var(--border-color);
+    background: #FFFFFF;
+    color: var(--grey-700);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.flowchart-pill-btn:hover, .flowchart-pill-btn.active {
+    background: var(--blue-50);
+    color: var(--blue-600);
+    border-color: var(--blue-500);
+}
+
+/* In-DM Order Receipt in iPhone Mockup */
+.ig-order-receipt-bubble {
+    background: #FFFFFF;
+    border: 1px solid #10B981;
+    border-radius: 14px;
+    padding: 10px 12px;
+    box-shadow: 0 4px 12px rgba(16,185,129,0.12);
+}
+
+.ig-receipt-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 800;
+    font-size: 0.78rem;
+    color: #059669;
+    margin-bottom: 6px;
+}
+
+.ig-receipt-row {
+    font-size: 0.72rem;
+    color: #334155;
+    margin-top: 3px;
+    line-height: 1.35;
+}
+
+.ig-crm-sync-badge {
+    background: #FEF3C7;
+    border: 1px solid #FCD34D;
+    color: #92400E;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    text-align: center;
+    margin-top: 6px;
+}
+
+/* ==========================================================================
    RESPONSIVE DESIGN RULES
    ========================================================================== */
 @media (max-width: 1024px) {

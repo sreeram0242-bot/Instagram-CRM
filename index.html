@@ -440,20 +440,204 @@
                         </div>
                     </div>
 
+                    <!-- INTERACTIVE 12-STEP IN-DM ORDER & FOLLOW-UP FLOWCHART -->
+                    <div class="content-card flowchart-diagram-card" id="cardFlowchartVisualizer" style="border:1.5px solid #93C5FD; background:#F8FAFC;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
+                            <div>
+                                <span class="lineup-step-badge" style="background:#DBEAFE; color:#1D4ED8; font-weight:800;">100% In-Instagram Conversational Checkout Flow</span>
+                                <h3 class="card-title" style="margin-top:4px;">Automated 12-Step In-DM Order &amp; Recovery Pipeline</h3>
+                            </div>
+                            <button type="button" class="btn-outline-blue" id="btnPreviewFlowchartSim" style="font-size:0.75rem; padding:4px 10px;">
+                                <span class="svg-icon">
+                                    <svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                </span>
+                                <span>Preview Full 12 Steps in iPhone</span>
+                            </button>
+                        </div>
+                        <p class="section-desc" style="margin-bottom:12px;">This exact sequence executes 100% natively inside Instagram Direct Messages. If a customer drops off at any step, the smart follow-up automatically re-engages them:</p>
+
+                        <!-- Flowchart Steps Grid (A through M) -->
+                        <div class="flowchart-steps-grid" id="flowchartVisualSteps">
+                            <!-- Step A -->
+                            <div class="flowchart-step-row step-user">
+                                <span class="flowchart-node-badge badge-a">A</span>
+                                <div style="flex:1;">
+                                    <div style="font-size:0.78rem; font-weight:700; color:#0F172A;">Customer comments keyword on Reel</div>
+                                    <div style="font-size:0.72rem; color:#475569;">Triggers on: 'PRICE', 'ORDER', 'BUY', 'COST'</div>
+                                </div>
+                                <span class="activity-badge badge-green" style="font-size:0.68rem;">Trigger</span>
+                            </div>
+
+                            <div class="flowchart-connector-line">↓</div>
+
+                            <!-- Step B -->
+                            <div class="flowchart-step-row step-bot">
+                                <span class="flowchart-node-badge badge-b">B</span>
+                                <div style="flex:1;">
+                                    <div style="font-size:0.78rem; font-weight:700; color:#0F172A;">Bot sends Product Card in DM with 'Buy in DM (COD/UPI)' button</div>
+                                    <div style="font-size:0.72rem; color:#475569;">Includes image, pricing, and native postback checkout button</div>
+                                </div>
+                                <button type="button" class="flowchart-pill-btn" onclick="selectFlowchartDropoff('drop_after_card')" title="Configure follow-up if customer doesn't tap button">
+                                    <span>Follow-up</span>
+                                </button>
+                            </div>
+
+                            <div class="flowchart-connector-line">↓</div>
+
+                            <!-- Step C -->
+                            <div class="flowchart-step-row step-user">
+                                <span class="flowchart-node-badge badge-c">C</span>
+                                <div style="flex:1;">
+                                    <div style="font-size:0.78rem; font-weight:700; color:#0F172A;">Customer taps 'Buy in DM' or replies 'ORDER'</div>
+                                    <div style="font-size:0.72rem; color:#475569;">Initiates conversational checkout state machine in DM</div>
+                                </div>
+                                <span class="activity-badge badge-blue" style="font-size:0.68rem;">In-DM</span>
+                            </div>
+
+                            <div class="flowchart-connector-line">↓</div>
+
+                            <!-- Step D -->
+                            <div class="flowchart-step-row step-bot">
+                                <span class="flowchart-node-badge badge-d">D</span>
+                                <div style="flex:1;">
+                                    <div style="font-size:0.78rem; font-weight:700; color:#0F172A;">Bot: "What SIZE do you need? (e.g. S, M, L, XL)"</div>
+                                    <div style="font-size:0.72rem; color:#475569;">Auto-asks size / variant directly in DM thread</div>
+                                </div>
+                                <button type="button" class="flowchart-pill-btn" onclick="selectFlowchartDropoff('drop_after_size_prompt')" title="Configure follow-up if customer drops off here">
+                                    <span>Follow-up</span>
+                                </button>
+                            </div>
+
+                            <div class="flowchart-connector-line">↓</div>
+
+                            <!-- Step E -->
+                            <div class="flowchart-step-row step-user">
+                                <span class="flowchart-node-badge badge-e">E</span>
+                                <div style="flex:1;">
+                                    <div style="font-size:0.78rem; font-weight:700; color:#0F172A;">Customer sends Size (e.g. 'Medium')</div>
+                                    <div style="font-size:0.72rem; color:#475569;">Size recorded to session and CRM lead draft</div>
+                                </div>
+                                <span class="activity-badge badge-green" style="font-size:0.68rem;">Saved</span>
+                            </div>
+
+                            <div class="flowchart-connector-line">↓</div>
+
+                            <!-- Step F -->
+                            <div class="flowchart-step-row step-bot">
+                                <span class="flowchart-node-badge badge-f">F</span>
+                                <div style="flex:1;">
+                                    <div style="font-size:0.78rem; font-weight:700; color:#0F172A;">Bot: "Please send your Delivery Address and Pincode:"</div>
+                                    <div style="font-size:0.72rem; color:#475569;">Requests shipping address inside Instagram DM</div>
+                                </div>
+                                <button type="button" class="flowchart-pill-btn" onclick="selectFlowchartDropoff('drop_after_size_reply')" title="Configure follow-up if customer doesn't send address">
+                                    <span>Follow-up</span>
+                                </button>
+                            </div>
+
+                            <div class="flowchart-connector-line">↓</div>
+
+                            <!-- Step G -->
+                            <div class="flowchart-step-row step-user">
+                                <span class="flowchart-node-badge badge-g">G</span>
+                                <div style="flex:1;">
+                                    <div style="font-size:0.78rem; font-weight:700; color:#0F172A;">Customer sends Address &amp; Pincode</div>
+                                    <div style="font-size:0.72rem; color:#475569;">e.g. 'Plot 42, Anna Nagar West, Chennai 600040'</div>
+                                </div>
+                                <span class="activity-badge badge-green" style="font-size:0.68rem;">Saved</span>
+                            </div>
+
+                            <div class="flowchart-connector-line">↓</div>
+
+                            <!-- Step H -->
+                            <div class="flowchart-step-row step-bot">
+                                <span class="flowchart-node-badge badge-h">H</span>
+                                <div style="flex:1;">
+                                    <div style="font-size:0.78rem; font-weight:700; color:#0F172A;">Bot: "What is your contact Phone Number for courier updates?"</div>
+                                    <div style="font-size:0.72rem; color:#475569;">Captures delivery contact number for courier dispatch</div>
+                                </div>
+                                <button type="button" class="flowchart-pill-btn" onclick="selectFlowchartDropoff('drop_after_address_reply')" title="Configure follow-up if customer doesn't send phone">
+                                    <span>Follow-up</span>
+                                </button>
+                            </div>
+
+                            <div class="flowchart-connector-line">↓</div>
+
+                            <!-- Step I -->
+                            <div class="flowchart-step-row step-user">
+                                <span class="flowchart-node-badge badge-i">I</span>
+                                <div style="flex:1;">
+                                    <div style="font-size:0.78rem; font-weight:700; color:#0F172A;">Customer sends Phone Number</div>
+                                    <div style="font-size:0.72rem; color:#475569;">e.g. '+91 919876543210'</div>
+                                </div>
+                                <span class="activity-badge badge-green" style="font-size:0.68rem;">Saved</span>
+                            </div>
+
+                            <div class="flowchart-connector-line">↓</div>
+
+                            <!-- Step J -->
+                            <div class="flowchart-step-row step-bot">
+                                <span class="flowchart-node-badge badge-j">J</span>
+                                <div style="flex:1;">
+                                    <div style="font-size:0.78rem; font-weight:700; color:#0F172A;">Bot: "Reply 1 for Cash on Delivery (COD) or 2 for Instant UPI"</div>
+                                    <div style="font-size:0.72rem; color:#475569;">Presents clear payment options directly in chat</div>
+                                </div>
+                                <button type="button" class="flowchart-pill-btn" onclick="selectFlowchartDropoff('drop_after_phone_reply')" title="Configure follow-up if customer doesn't pick payment">
+                                    <span>Follow-up</span>
+                                </button>
+                            </div>
+
+                            <div class="flowchart-connector-line">↓</div>
+
+                            <!-- Step K -->
+                            <div class="flowchart-step-row step-user">
+                                <span class="flowchart-node-badge badge-k">K</span>
+                                <div style="flex:1;">
+                                    <div style="font-size:0.78rem; font-weight:700; color:#0F172A;">Customer sends 1 (COD) or 2 (UPI)</div>
+                                    <div style="font-size:0.72rem; color:#475569;">Payment method confirmed by customer</div>
+                                </div>
+                                <span class="activity-badge badge-green" style="font-size:0.68rem;">Saved</span>
+                            </div>
+
+                            <div class="flowchart-connector-line">↓</div>
+
+                            <!-- Step L -->
+                            <div class="flowchart-step-row step-success">
+                                <span class="flowchart-node-badge badge-l">L</span>
+                                <div style="flex:1;">
+                                    <div style="font-size:0.78rem; font-weight:800; color:#5B21B6;">Official Order Confirmation generated in DM with Order ID (#ORD-18079-108)</div>
+                                    <div style="font-size:0.72rem; color:#6D28D9;">Includes item summary, address, phone, and dispatch confirmation</div>
+                                </div>
+                                <span class="activity-badge badge-blue" style="font-size:0.68rem;">Confirmed</span>
+                            </div>
+
+                            <div class="flowchart-connector-line">↓</div>
+
+                            <!-- Step M -->
+                            <div class="flowchart-step-row" style="background:#FFFBEB; border-left:4px solid #D97706;">
+                                <span class="flowchart-node-badge badge-m">M</span>
+                                <div style="flex:1;">
+                                    <div style="font-size:0.78rem; font-weight:800; color:#92400E;">Order appears in CRM with Address, Phone, Size, and 'Mark Shipped' button</div>
+                                    <div style="font-size:0.72rem; color:#B45309;">Staff can 1-click update shipping and dispatch notification in DM</div>
+                                </div>
+                                <span class="activity-badge badge-orange" style="font-size:0.68rem;">CRM Ready</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- STEP 1: LINE-UP SEQUENCE (IMMEDIATE RESPONSE) -->
                     <div class="content-card" id="cardLineupStep1" style="border-left:4px solid #2563EB;">
                         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
-                            <span class="lineup-step-badge">Sequence Step 1: Immediate Response</span>
+                            <span class="lineup-step-badge">Sequence Step 1: Immediate Response (Flowchart Steps A &amp; B)</span>
                             <span style="font-size:0.75rem; color:#64748B;">Delay: <strong>Instant (0s)</strong></span>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Private Welcome Greeting (Tags: {name}, {product}, {price}):</label>
-                            <textarea class="form-textarea" id="inputFlowMessage" rows="3">Hey {name}! Thanks for commenting on our reel. Here are the exclusive product details and a special 15% discount link:</textarea>
+                            <textarea class="form-textarea" id="inputFlowMessage" rows="3">Hey {name}! Thanks for commenting on our reel. Here are the exclusive product details and direct order options:</textarea>
                         </div>
 
                         <div style="border-top:1px solid #E2E8F0; padding-top:12px; margin-top:12px;">
-                            <label class="form-label" style="margin-bottom:8px; display:block;">Product Card Preview Attachment:</label>
+                            <label class="form-label" style="margin-bottom:8px; display:block;">Product Card Preview Attachment (Step B):</label>
                             <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                                 <div class="form-group">
                                     <label class="form-label">Product Title:</label>
@@ -466,7 +650,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Card Subtitle / Description:</label>
-                                <input type="text" class="form-input" id="inputCardSubtitle" value="Exclusive Instagram special. Tap below to order on WhatsApp with free delivery.">
+                                <input type="text" class="form-input" id="inputCardSubtitle" value="Exclusive Instagram special. Tap below to order in DM with free delivery.">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Product Image URL:</label>
@@ -494,24 +678,104 @@
                         </svg>
                     </div>
 
-                    <!-- STEP 2: LINE-UP SEQUENCE (AUTOMATED TIMED FOLLOW-UP) -->
-                    <div class="content-card" id="cardLineupStep2" style="border-left:4px solid #10B981;">
+                    <!-- STEP 2: IN-DM CONVERSATIONAL CHECKOUT BOT (AUTO-COLLECT ORDER) -->
+                    <div class="content-card" id="cardInDmCheckoutStep" style="border-left:4px solid #2563EB;">
                         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
-                            <span class="lineup-step-badge" style="background:#ECFDF5; color:#059669;">Sequence Step 2: Automated Follow-Up Line-Up</span>
+                            <span class="lineup-step-badge" style="background:#EFF6FF; color:#2563EB;">Sequence Step 2: In-DM Conversational Checkout Bot (Flowchart Steps D to L)</span>
+                            <label style="display:flex; align-items:center; gap:6px; font-size:0.75rem; font-weight:700; color:#1E293B; cursor:pointer;">
+                                <input type="checkbox" id="checkEnableInDmCheckout" checked style="accent-color:#2563EB;">
+                                <span>Enable In-DM Order Collection</span>
+                            </label>
+                        </div>
+                        <p class="section-desc" style="margin-bottom:12px;">When a customer comments or taps "Buy in DM", the bot asks each question one-by-one inside Instagram DM to collect their complete order without leaving Instagram:</p>
+
+                        <!-- Step-by-Step Questions Grid -->
+                        <div style="display:flex; flex-direction:column; gap:12px;">
+                            <div class="form-group" style="background:#F8FAFC; border:1px solid #E2E8F0; padding:10px 12px; border-radius:8px;">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                                    <label class="form-label" style="margin:0; font-weight:700; color:#1E293B;">Step D: Size &amp; Quantity Prompt:</label>
+                                    <span style="font-size:0.7rem; color:#64748B;">Customer selects variant</span>
+                                </div>
+                                <input type="text" class="form-input" id="inputDmPromptSize" value="Awesome! What SIZE or quantity do you need? (e.g. S, M, L, XL)">
+                            </div>
+
+                            <div class="form-group" style="background:#F8FAFC; border:1px solid #E2E8F0; padding:10px 12px; border-radius:8px;">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                                    <label class="form-label" style="margin:0; font-weight:700; color:#1E293B;">Step F: Delivery Address &amp; Pincode Prompt:</label>
+                                    <span style="font-size:0.7rem; color:#64748B;">Shipping details</span>
+                                </div>
+                                <input type="text" class="form-input" id="inputDmPromptAddress" value="Great! Size saved. Please send your full Delivery Address and Pincode for shipping:">
+                            </div>
+
+                            <div class="form-group" style="background:#F8FAFC; border:1px solid #E2E8F0; padding:10px 12px; border-radius:8px;">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                                    <label class="form-label" style="margin:0; font-weight:700; color:#1E293B;">Step H: Contact Phone Number Prompt:</label>
+                                    <span style="font-size:0.7rem; color:#64748B;">Courier delivery updates</span>
+                                </div>
+                                <input type="text" class="form-input" id="inputDmPromptPhone" value="Address saved! What is your contact Phone Number for courier delivery updates?">
+                            </div>
+
+                            <div class="form-group" style="background:#F8FAFC; border:1px solid #E2E8F0; padding:10px 12px; border-radius:8px;">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                                    <label class="form-label" style="margin:0; font-weight:700; color:#1E293B;">Step J: Payment Method Prompt:</label>
+                                    <span style="font-size:0.7rem; color:#64748B;">COD or Instant UPI</span>
+                                </div>
+                                <input type="text" class="form-input" id="inputDmPromptPayment" value="Almost done! How would you like to pay? Reply '1' for Cash on Delivery (COD) or '2' for Instant UPI payment">
+                            </div>
+
+                            <div class="form-group" style="background:#F8FAFC; border:1px solid #E2E8F0; padding:10px 12px; border-radius:8px;">
+                                <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                                    <label class="form-label" style="margin:0; font-weight:700; color:#1E293B;">Step L: Order Confirmation Message Template:</label>
+                                    <span style="font-size:0.7rem; color:#64748B;">Official Order ID card</span>
+                                </div>
+                                <textarea class="form-textarea" id="inputDmPromptConfirmation" rows="3">Order Confirmed! Your Order ID is #{order_id}. Product: {product}, Size: {size}, Delivery Address: {address}, Payment: {payment}. We are preparing your order for dispatch!</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Line-up Connector Arrow -->
+                    <div class="lineup-arrow-connector">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </div>
+
+                    <!-- STEP 3: AUTOMATED IN-DM ORDER ABANDONMENT FOLLOW-UP -->
+                    <div class="content-card" id="cardLineupStep2" style="border-left:4px solid #10B981;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                            <span class="lineup-step-badge" style="background:#ECFDF5; color:#059669;">Sequence Step 3: In-DM Order Abandonment Follow-Up</span>
                             <label style="display:flex; align-items:center; gap:6px; font-size:0.75rem; font-weight:700; color:#1E293B; cursor:pointer;">
                                 <input type="checkbox" id="checkEnableFollowup" checked style="accent-color:#10B981;">
                                 <span>Enable Line-Up Follow-up</span>
                             </label>
                         </div>
-                        <p class="section-desc" style="margin-bottom:10px;">Automatically sends a gentle follow-up sequence if the customer has not clicked or checked out after opening the DM:</p>
+                        <p class="section-desc" style="margin-bottom:12px;">Automatically re-engages customers who dropped off at any specific step of the order flowchart:</p>
+
+                        <!-- Flowchart Drop-Off Step Selection Pills -->
+                        <div style="margin-bottom:12px;">
+                            <span style="font-size:0.74rem; font-weight:700; color:#475569; display:block; margin-bottom:6px;">Select Flowchart Drop-Off Stage to Recover:</span>
+                            <div style="display:flex; flex-wrap:wrap; gap:6px;" id="flowchartDropoffPills">
+                                <button type="button" class="flowchart-pill-btn active" onclick="selectFlowchartDropoff('no_order_complete')">All Abandoned Checkouts</button>
+                                <button type="button" class="flowchart-pill-btn" onclick="selectFlowchartDropoff('drop_after_card')">Step B: Didn't Tap 'Buy in DM'</button>
+                                <button type="button" class="flowchart-pill-btn" onclick="selectFlowchartDropoff('drop_after_size_prompt')">Step D: Didn't Send Size</button>
+                                <button type="button" class="flowchart-pill-btn" onclick="selectFlowchartDropoff('drop_after_size_reply')">Step F: Didn't Send Address</button>
+                                <button type="button" class="flowchart-pill-btn" onclick="selectFlowchartDropoff('drop_after_address_reply')">Step H: Didn't Send Phone</button>
+                                <button type="button" class="flowchart-pill-btn" onclick="selectFlowchartDropoff('drop_after_phone_reply')">Step J: Didn't Pick Payment</button>
+                            </div>
+                        </div>
 
                         <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
                             <div class="form-group">
-                                <label class="form-label">Follow-up Trigger Condition:</label>
+                                <label class="form-label">Flowchart Drop-Off Trigger Condition:</label>
                                 <select class="form-select" id="selectFollowupCondition">
-                                    <option value="no_click">If no button clicked in DM</option>
-                                    <option value="no_wa">If WhatsApp checkout not initiated</option>
-                                    <option value="always">Send to all commenters</option>
+                                    <option value="no_order_complete">Flowchart Step L: Any Incomplete Order (Abandoned checkout before Order Confirmation)</option>
+                                    <option value="drop_after_card">Flowchart Step B ➔ C: Received Product Card but didn't tap 'Buy in DM' or reply 'ORDER'</option>
+                                    <option value="drop_after_size_prompt">Flowchart Step D ➔ E: Bot asked for Size, but Customer didn't reply with Size</option>
+                                    <option value="drop_after_size_reply">Flowchart Step F ➔ G: Customer selected Size, but didn't send Delivery Address &amp; Pincode</option>
+                                    <option value="drop_after_address_reply">Flowchart Step H ➔ I: Customer sent Address, but didn't send Phone Number for Courier</option>
+                                    <option value="drop_after_phone_reply">Flowchart Step J ➔ K: Customer sent Phone, but didn't confirm Payment (1 for COD / 2 for UPI)</option>
+                                    <option value="always">Send to all commenters (General Engagement)</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -526,8 +790,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Follow-up Message Copy (Includes extra incentive):</label>
-                            <textarea class="form-textarea" id="inputFollowupText" rows="2">Still thinking about the {product}? We just unlocked free worldwide shipping for your order! Use code FREESHIP at checkout:</textarea>
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                                <label class="form-label" style="margin:0;">Follow-up Message Copy (Customized for selected flowchart drop-off):</label>
+                                <button type="button" class="btn-secondary" id="btnResetFollowupTemplate" style="font-size:0.7rem; padding:2px 8px;">Load Smart Template</button>
+                            </div>
+                            <textarea class="form-textarea" id="inputFollowupText" rows="3">Still thinking about the {product}? We reserved your size in stock with Free Shipping! Reply 'ORDER' to complete your order directly here with Cash on Delivery or UPI.</textarea>
                         </div>
                     </div>
 
@@ -544,6 +811,13 @@
 
                 <!-- Right: Realistic iPhone Instagram DM Simulator -->
                 <div class="phone-mockup-wrapper" id="phoneWrapper">
+                    <!-- Simulator View Modes -->
+                    <div class="sim-mode-toolbar" id="simModeToolbar">
+                        <button type="button" class="sim-mode-btn active" data-mode="card" id="simBtnCard">1. Product Card</button>
+                        <button type="button" class="sim-mode-btn" data-mode="orderflow" id="simBtnOrderFlow">2. In-DM Order Flow (12 Steps)</button>
+                        <button type="button" class="sim-mode-btn" data-mode="followup" id="simBtnFollowup">3. Follow-Up Step</button>
+                    </div>
+
                     <div class="iphone-frame" id="iphoneMockupFrame">
                         <div class="iphone-notch"></div>
                         <div class="iphone-screen">

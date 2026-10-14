@@ -1032,11 +1032,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const buttonEditorList = document.getElementById('buttonEditorList');
     const btnAddInteractiveButton = document.getElementById('btnAddInteractiveButton');
 
-    // Step 2 Follow-up Inputs
+    // Step 2 In-DM Conversational Checkout Inputs
+    const checkEnableInDmCheckout = document.getElementById('checkEnableInDmCheckout');
+    const inputDmPromptSize = document.getElementById('inputDmPromptSize');
+    const inputDmPromptAddress = document.getElementById('inputDmPromptAddress');
+    const inputDmPromptPhone = document.getElementById('inputDmPromptPhone');
+    const inputDmPromptPayment = document.getElementById('inputDmPromptPayment');
+    const inputDmPromptConfirmation = document.getElementById('inputDmPromptConfirmation');
+
+    // Step 3 Follow-up Inputs
     const checkEnableFollowup = document.getElementById('checkEnableFollowup');
     const selectFollowupCondition = document.getElementById('selectFollowupCondition');
     const selectFollowupDelay = document.getElementById('selectFollowupDelay');
     const inputFollowupText = document.getElementById('inputFollowupText');
+    const btnResetFollowupTemplate = document.getElementById('btnResetFollowupTemplate');
+    const btnPreviewFlowchartSim = document.getElementById('btnPreviewFlowchartSim');
 
     // Simulator elements
     const simulatedMsgText = document.getElementById('simulatedMsgText');
@@ -1045,6 +1055,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const simulatedCardSubtitle = document.getElementById('simulatedCardSubtitle');
     const simulatedCardImg = document.getElementById('simulatedCardImg');
     const simulatedButtonsContainer = document.getElementById('simulatedButtonsContainer');
+
+    // Smart Follow-Up Drop-Off Templates Tailored for Each Step of the 12-Step Flowchart
+    const flowchartDropoffTemplates = {
+        'no_order_complete': "Still thinking about the {product}? We reserved your size in stock with Free Shipping! Reply 'ORDER' to complete your order directly here with Cash on Delivery or UPI.",
+        'drop_after_card': "Hey {name}! We saw you checked out our {product}. We only have a few pieces left in stock! Tap 'Buy in DM' or reply 'ORDER' right here to reserve yours with Free Shipping!",
+        'drop_after_size_prompt': "Hey {name}! Quick check—what SIZE or fit should we keep aside for you? (e.g. S, M, L, XL or Free Size). Just reply here with your size!",
+        'drop_after_size_reply': "Awesome {name}, your size is reserved! What is your full Delivery Address and Pincode so our courier partner can deliver your {product}?",
+        'drop_after_address_reply': "Almost done {name}! Please reply with your Phone Number so our courier team can send SMS tracking updates for your package.",
+        'drop_after_phone_reply': "Hey {name}! Last step to confirm your order #{order_id}: Would you like Cash on Delivery (COD) or Instant UPI? Reply '1' for COD or '2' for UPI!",
+        'always': "Hey {name}! Thanks again for checking out our post. Reply 'ORDER' anytime if you'd like us to dispatch this to your doorstep with Cash on Delivery!"
+    };
+
+    appState.simMode = appState.simMode || 'card'; // 'card' | 'orderflow' | 'followup'
 
     function getActiveReel() {
         return appState.reels.find(r => r.id === appState.selectedBuilderReelId) || appState.reels[0];
@@ -1096,18 +1119,47 @@ document.addEventListener('DOMContentLoaded', () => {
         if (inputCardSubtitle) inputCardSubtitle.value = activeFlow.cardSubtitle;
         if (inputCardImageUrl) inputCardImageUrl.value = activeFlow.cardImg;
 
-        // 5. Populate Step 2 Follow-Up Inputs
+        // 5. Populate Step 2 In-DM Conversational Checkout Bot Inputs
+        if (!activeFlow.inDmOrder) {
+            activeFlow.inDmOrder = {
+                enabled: true,
+                promptSize: "Awesome! What SIZE or quantity do you need? (e.g. S, M, L, XL)",
+                promptAddress: "Great! Size saved. Please send your full Delivery Address and Pincode for shipping:",
+                promptPhone: "Address saved! What is your contact Phone Number for courier delivery updates?",
+                promptPayment: "Almost done! How would you like to pay? Reply '1' for Cash on Delivery (COD) or '2' for Instant UPI payment",
+                promptConfirmation: "Order Confirmed! Your Order ID is #{order_id}. Product: {product}, Size: {size}, Delivery Address: {address}, Payment: {payment}. We are preparing your order for dispatch!"
+            };
+        }
+        if (checkEnableInDmCheckout) checkEnableInDmCheckout.checked = activeFlow.inDmOrder.enabled !== false;
+        if (inputDmPromptSize) inputDmPromptSize.value = activeFlow.inDmOrder.promptSize;
+        if (inputDmPromptAddress) inputDmPromptAddress.value = activeFlow.inDmOrder.promptAddress;
+        if (inputDmPromptPhone) inputDmPromptPhone.value = activeFlow.inDmOrder.promptPhone;
+        if (inputDmPromptPayment) inputDmPromptPayment.value = activeFlow.inDmOrder.promptPayment;
+        if (inputDmPromptConfirmation) inputDmPromptConfirmation.value = activeFlow.inDmOrder.promptConfirmation;
+
+        // 6. Populate Step 3 Follow-Up Inputs
         if (activeFlow.followUp) {
-            if (checkEnableFollowup) checkEnableFollowup.checked = activeFlow.followUp.enabled;
-            if (selectFollowupCondition) selectFollowupCondition.value = activeFlow.followUp.condition || 'no_click';
-            if (selectFollowupDelay) selectFollowupDelay.value = activeFlow.followUp.delayMinutes || '15';
-            if (inputFollowupText) inputFollowupText.value = activeFlow.followUp.text || '';
+            if (checkEnableFollowup) checkEnableFollowup.checked = activeFlow.followUp.enabled !== false;
+            const cond = activeFlow.followUp.condition || 'no_order_complete';
+            if (selectFollowupCondition) selectFollowupCondition.value = cond;
+            if (selectFollowupDelay) selectFollowupDelay.value = String(activeFlow.followUp.delayMinutes || '15');
+            if (inputFollowupText) inputFollowupText.value = activeFlow.followUp.text || flowchartDropoffTemplates[cond] || flowchartDropoffTemplates['no_order_complete'];
+
+            // Highlight corresponding flowchart drop-off pill
+            const pills = document.querySelectorAll('#flowchartDropoffPills .flowchart-pill-btn');
+            pills.forEach(p => {
+                if (p.getAttribute('onclick') && p.getAttribute('onclick').includes(cond)) {
+                    p.classList.add('active');
+                } else {
+                    p.classList.remove('active');
+                }
+            });
         }
 
-        // 6. Render Buttons
+        // 7. Render Buttons
         renderButtonEditorRows();
 
-        // 7. Synchronize Live iPhone Simulator
+        // 8. Synchronize Live iPhone Simulator
         syncPhoneSimulator();
     }
 
@@ -1209,18 +1261,26 @@ document.addEventListener('DOMContentLoaded', () => {
             simulatedCustomerComment: `${keywords[0]} please!`,
             welcomeText: `Hey {name}! Here are details regarding ${ruleName.toLowerCase()}:`,
             cardTitle: activeReel.title,
-            cardPrice: "$39.00",
-            cardSubtitle: "Instant response for your inquiry. Tap below to chat directly:",
+            cardPrice: "DM for Pricing",
+            cardSubtitle: "Instant response for your inquiry. Tap below to complete your order in DM:",
             cardImg: activeReel.img,
             buttons: [
-                { id: `b_${Date.now()}_1`, text: 'Chat on WhatsApp', action: 'whatsapp', style: 'whatsapp' },
-                { id: `b_${Date.now()}_2`, text: 'Claim Offer', action: 'coupon', style: 'default' }
+                { id: `b_${Date.now()}_1`, text: 'Buy in DM (COD / UPI)', action: 'in_dm_checkout', style: 'default' },
+                { id: `b_${Date.now()}_2`, text: 'Size & Sizing Info', action: 'modal_product', style: 'default' }
             ],
+            inDmOrder: {
+                enabled: true,
+                promptSize: "Awesome! What SIZE or quantity do you need? (e.g. S, M, L, XL)",
+                promptAddress: "Great! Size saved. Please send your full Delivery Address and Pincode for shipping:",
+                promptPhone: "Address saved! What is your contact Phone Number for courier delivery updates?",
+                promptPayment: "Almost done! How would you like to pay? Reply '1' for Cash on Delivery (COD) or '2' for Instant UPI payment",
+                promptConfirmation: "Order Confirmed! Your Order ID is #{order_id}. Product: {product}, Size: {size}, Delivery Address: {address}, Payment: {payment}. We are preparing your order for dispatch!"
+            },
             followUp: {
                 enabled: true,
-                condition: 'no_click',
+                condition: 'no_order_complete',
                 delayMinutes: 15,
-                text: `Did that answer your question about ${ruleName}? Let us know if you need anything else!`
+                text: `Did that answer your question about ${ruleName}? Reply 'ORDER' to complete your order directly here with Cash on Delivery or UPI!`
             }
         };
 
@@ -1247,83 +1307,275 @@ document.addEventListener('DOMContentLoaded', () => {
         btnSwitchToReelsTab.addEventListener('click', () => switchTab('tabReels'));
     }
 
+    // Flowchart Drop-Off Pill Selector Handler
+    window.selectFlowchartDropoff = (conditionKey) => {
+        const activeFlow = getActiveFlow();
+        if (selectFollowupCondition) {
+            selectFollowupCondition.value = conditionKey;
+        }
+        const pills = document.querySelectorAll('#flowchartDropoffPills .flowchart-pill-btn');
+        pills.forEach(p => {
+            if (p.getAttribute('onclick') && p.getAttribute('onclick').includes(conditionKey)) {
+                p.classList.add('active');
+            } else {
+                p.classList.remove('active');
+            }
+        });
+        const template = flowchartDropoffTemplates[conditionKey] || flowchartDropoffTemplates['no_order_complete'];
+        if (inputFollowupText) {
+            inputFollowupText.value = template;
+        }
+        if (activeFlow.followUp) {
+            activeFlow.followUp.condition = conditionKey;
+            activeFlow.followUp.text = template;
+        }
+        saveAppState();
+        syncPhoneSimulator();
+        showToast('check', `Configured follow-up for flowchart drop-off: ${conditionKey}`);
+
+        const cardLineupStep2 = document.getElementById('cardLineupStep2');
+        if (cardLineupStep2) {
+            cardLineupStep2.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    };
+
+    // Simulator View Mode Toggle Buttons
+    const simModeBtns = document.querySelectorAll('.sim-mode-btn');
+    simModeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const mode = btn.getAttribute('data-mode');
+            appState.simMode = mode;
+            simModeBtns.forEach(b => b.classList.toggle('active', b === btn));
+            syncPhoneSimulator();
+        });
+    });
+
+    if (btnPreviewFlowchartSim) {
+        btnPreviewFlowchartSim.addEventListener('click', () => {
+            appState.simMode = 'orderflow';
+            simModeBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-mode') === 'orderflow'));
+            syncPhoneSimulator();
+            const phoneWrapper = document.getElementById('phoneWrapper');
+            if (phoneWrapper) {
+                phoneWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            showToast('zap', 'Previewing 12-Step In-DM Order Sequence in iPhone');
+        });
+    }
+
     function syncPhoneSimulator() {
         const activeFlow = getActiveFlow();
         triggerAutoSave();
 
-        if (simulatedMsgText && inputFlowMessage) {
-            simulatedMsgText.textContent = inputFlowMessage.value.replace('{name}', 'Sarah');
-            activeFlow.welcomeText = inputFlowMessage.value;
-        }
-        if (simulatedCardTitle && inputCardTitle) {
-            simulatedCardTitle.textContent = inputCardTitle.value;
-            activeFlow.cardTitle = inputCardTitle.value;
-        }
-        if (simulatedCardPrice && inputCardPrice) {
-            simulatedCardPrice.textContent = inputCardPrice.value;
-            activeFlow.cardPrice = inputCardPrice.value;
-        }
-        if (simulatedCardSubtitle && inputCardSubtitle) {
-            simulatedCardSubtitle.textContent = inputCardSubtitle.value;
-            activeFlow.cardSubtitle = inputCardSubtitle.value;
-        }
-        if (simulatedCardImg && inputCardImageUrl) {
-            simulatedCardImg.src = inputCardImageUrl.value;
-            activeFlow.cardImg = inputCardImageUrl.value;
+        const messagesArea = document.getElementById('igDmMessagesArea');
+        if (!messagesArea) return;
+
+        // Ensure activeFlow.inDmOrder exists
+        if (!activeFlow.inDmOrder) {
+            activeFlow.inDmOrder = {
+                enabled: true,
+                promptSize: "Awesome! What SIZE or quantity do you need? (e.g. S, M, L, XL)",
+                promptAddress: "Great! Size saved. Please send your full Delivery Address and Pincode for shipping:",
+                promptPhone: "Address saved! What is your contact Phone Number for courier delivery updates?",
+                promptPayment: "Almost done! How would you like to pay? Reply '1' for Cash on Delivery (COD) or '2' for Instant UPI payment",
+                promptConfirmation: "Order Confirmed! Your Order ID is #{order_id}. Product: {product}, Size: {size}, Delivery Address: {address}, Payment: {payment}. We are preparing your order for dispatch!"
+            };
         }
 
-        // Show matching simulated comment in iPhone screen
-        const customerCommentBubble = document.querySelector('#igDmMessagesArea div[style*="align-self:flex-end"]');
-        if (customerCommentBubble) {
-            customerCommentBubble.textContent = activeFlow.simulatedCustomerComment || (activeFlow.keywords.length ? `${activeFlow.keywords[0]} please!` : 'PRICE please!');
+        const mode = appState.simMode || 'card';
+
+        if (mode === 'orderflow') {
+            // RENDER THE FULL 12-STEP IN-DM ORDER FLOWCHART CONVERSATION
+            messagesArea.innerHTML = `
+                <div style="text-align:center; margin-bottom:8px;">
+                    <span style="font-size:0.65rem; color:#8E8E8E; background:#EEEEEE; padding:2px 8px; border-radius:10px;">TODAY 12:45 PM • 12-STEP CONVERSATIONAL CHECKOUT</span>
+                </div>
+
+                <!-- Step A: Customer comments keyword on Reel -->
+                <div style="align-self:flex-end; background:#3797F0; color:white; padding:8px 12px; border-radius:18px; font-size:0.78rem; max-width:85%;">
+                    <div style="font-size:0.65rem; opacity:0.85; margin-bottom:2px; font-weight:700;">STEP A: Customer Comments on Reel</div>
+                    ${activeFlow.simulatedCustomerComment || (activeFlow.keywords.length ? `${activeFlow.keywords[0]} please! Available in Medium?` : 'PRICE please!')}
+                </div>
+
+                <!-- Step B: Bot sends Product Card in DM -->
+                <div class="ig-bubble-in">
+                    <div style="font-size:0.68rem; color:#2563EB; font-weight:700;">STEP B: Bot Sends Product Card in DM</div>
+                    <div style="background:#EFEFEF; color:#262626; padding:8px 12px; border-radius:18px; font-size:0.78rem;">
+                        ${(inputFlowMessage ? inputFlowMessage.value : activeFlow.welcomeText).replace('{name}', 'Sarah')}
+                    </div>
+                    <div class="ig-card-bubble">
+                        <img src="${inputCardImageUrl ? inputCardImageUrl.value : activeFlow.cardImg}" alt="Product" class="ig-card-img">
+                        <div class="ig-card-content">
+                            <div class="ig-card-title">${inputCardTitle ? inputCardTitle.value : activeFlow.cardTitle}</div>
+                            <div class="ig-card-text">${inputCardSubtitle ? inputCardSubtitle.value : activeFlow.cardSubtitle}</div>
+                            <div class="ig-card-price">${inputCardPrice ? inputCardPrice.value : activeFlow.cardPrice}</div>
+                        </div>
+                        <div class="ig-interactive-buttons">
+                            <button type="button" class="ig-interactive-btn" style="background:#EFF6FF; color:#2563EB; font-weight:800;" onclick="triggerSimulatedDmAction('in_dm_checkout', 'Buy in DM (COD / UPI)')">
+                                Buy in DM (COD / UPI)
+                            </button>
+                            <button type="button" class="ig-interactive-btn" onclick="triggerSimulatedDmAction('modal_product', 'Size & Sizing Info')">
+                                Size &amp; Sizing Info
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step C: Customer taps Buy in DM or replies ORDER -->
+                <div style="align-self:flex-end; background:#3797F0; color:white; padding:8px 12px; border-radius:18px; font-size:0.78rem; max-width:85%;">
+                    <div style="font-size:0.65rem; opacity:0.85; margin-bottom:2px; font-weight:700;">STEP C: Customer Taps "Buy in DM"</div>
+                    Buy in DM (COD / UPI)
+                </div>
+
+                <!-- Step D: Bot asks Size -->
+                <div class="ig-bubble-in">
+                    <div style="font-size:0.68rem; color:#2563EB; font-weight:700;">STEP D: Bot Asks Size</div>
+                    <div style="background:#EFEFEF; color:#262626; padding:8px 12px; border-radius:18px; font-size:0.78rem;">
+                        ${inputDmPromptSize ? inputDmPromptSize.value : activeFlow.inDmOrder.promptSize}
+                    </div>
+                </div>
+
+                <!-- Step E: Customer sends Size -->
+                <div style="align-self:flex-end; background:#3797F0; color:white; padding:8px 12px; border-radius:18px; font-size:0.78rem; max-width:85%;">
+                    <div style="font-size:0.65rem; opacity:0.85; margin-bottom:2px; font-weight:700;">STEP E: Customer Sends Size</div>
+                    Medium (M)
+                </div>
+
+                <!-- Step F: Bot asks Delivery Address -->
+                <div class="ig-bubble-in">
+                    <div style="font-size:0.68rem; color:#2563EB; font-weight:700;">STEP F: Bot Asks Address &amp; Pincode</div>
+                    <div style="background:#EFEFEF; color:#262626; padding:8px 12px; border-radius:18px; font-size:0.78rem;">
+                        ${inputDmPromptAddress ? inputDmPromptAddress.value : activeFlow.inDmOrder.promptAddress}
+                    </div>
+                </div>
+
+                <!-- Step G: Customer sends Address -->
+                <div style="align-self:flex-end; background:#3797F0; color:white; padding:8px 12px; border-radius:18px; font-size:0.78rem; max-width:85%;">
+                    <div style="font-size:0.65rem; opacity:0.85; margin-bottom:2px; font-weight:700;">STEP G: Customer Sends Address</div>
+                    12/4 Anna Nagar West, Chennai - 600040
+                </div>
+
+                <!-- Step H: Bot asks Phone Number -->
+                <div class="ig-bubble-in">
+                    <div style="font-size:0.68rem; color:#2563EB; font-weight:700;">STEP H: Bot Asks Contact Phone Number</div>
+                    <div style="background:#EFEFEF; color:#262626; padding:8px 12px; border-radius:18px; font-size:0.78rem;">
+                        ${inputDmPromptPhone ? inputDmPromptPhone.value : activeFlow.inDmOrder.promptPhone}
+                    </div>
+                </div>
+
+                <!-- Step I: Customer sends Phone -->
+                <div style="align-self:flex-end; background:#3797F0; color:white; padding:8px 12px; border-radius:18px; font-size:0.78rem; max-width:85%;">
+                    <div style="font-size:0.65rem; opacity:0.85; margin-bottom:2px; font-weight:700;">STEP I: Customer Sends Phone Number</div>
+                    +91 919876543210
+                </div>
+
+                <!-- Step J: Bot asks Payment method -->
+                <div class="ig-bubble-in">
+                    <div style="font-size:0.68rem; color:#2563EB; font-weight:700;">STEP J: Bot Asks Payment Method</div>
+                    <div style="background:#EFEFEF; color:#262626; padding:8px 12px; border-radius:18px; font-size:0.78rem;">
+                        ${inputDmPromptPayment ? inputDmPromptPayment.value : activeFlow.inDmOrder.promptPayment}
+                    </div>
+                </div>
+
+                <!-- Step K: Customer sends Payment option -->
+                <div style="align-self:flex-end; background:#3797F0; color:white; padding:8px 12px; border-radius:18px; font-size:0.78rem; max-width:85%;">
+                    <div style="font-size:0.65rem; opacity:0.85; margin-bottom:2px; font-weight:700;">STEP K: Customer Confirms Payment</div>
+                    1 (Cash on Delivery)
+                </div>
+
+                <!-- Step L: Official Order Confirmation card in DM -->
+                <div class="ig-bubble-in" style="width:100%;">
+                    <div style="font-size:0.68rem; color:#059669; font-weight:700;">STEP L: Official Order Confirmation Generated in DM</div>
+                    <div class="ig-order-receipt-bubble">
+                        <div class="ig-receipt-header">
+                            <span>✓</span>
+                            <span>Order Confirmed: #ORD-18079-108</span>
+                        </div>
+                        <div class="ig-receipt-row"><strong>Item:</strong> ${inputCardTitle ? inputCardTitle.value : activeFlow.cardTitle}</div>
+                        <div class="ig-receipt-row"><strong>Size:</strong> Medium (M)</div>
+                        <div class="ig-receipt-row"><strong>Address:</strong> 12/4 Anna Nagar West, Chennai - 600040</div>
+                        <div class="ig-receipt-row"><strong>Phone:</strong> +91 919876543210</div>
+                        <div class="ig-receipt-row"><strong>Payment:</strong> Cash on Delivery (COD)</div>
+                        <div class="ig-receipt-row" style="color:#059669; font-weight:700; margin-top:4px;">Status: Preparing for Courier Dispatch</div>
+                    </div>
+                </div>
+
+                <!-- Step M: CRM Order Banner -->
+                <div class="ig-crm-sync-badge">
+                    STEP M: Order auto-synced to CRM Column 3 with Address, Phone, Size, and 'Mark Shipped' button
+                </div>
+            `;
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+            return;
         }
 
-        if (simulatedButtonsContainer) {
-            simulatedButtonsContainer.innerHTML = activeFlow.buttons.map(btn => `
-                <button type="button" class="ig-interactive-btn ${btn.style === 'whatsapp' ? 'btn-whatsapp' : ''}" onclick="triggerSimulatedDmAction('${btn.action}', '${btn.text}')">
-                    ${btn.text}
-                </button>
-            `).join('');
-        }
-
-        // STEP 2 LINE-UP TIMED FOLLOW-UP PREVIEW
-        const followupWrapper = document.getElementById('simulatedFollowupWrapper');
-        const followupBadge = document.getElementById('simulatedFollowupBadge');
-        const followupText = document.getElementById('simulatedFollowupMsgText');
-
+        // RENDER STANDARD SIMULATOR VIEW (CARD OR FOLLOW-UP)
         const isFollowupActive = checkEnableFollowup ? checkEnableFollowup.checked : (activeFlow.followUp && activeFlow.followUp.enabled);
         const delayVal = selectFollowupDelay ? selectFollowupDelay.value : (activeFlow.followUp ? activeFlow.followUp.delayMinutes : '15');
         const delayLabel = delayVal === '60' ? '+1 HOUR' : delayVal === '240' ? '+4 HOURS' : delayVal === '1440' ? '+24 HOURS' : `+${delayVal} MINS`;
+        const followupMsg = (inputFollowupText ? inputFollowupText.value : (activeFlow.followUp ? activeFlow.followUp.text : '')).replace('{product}', activeFlow.cardTitle || 'this item');
 
-        if (followupWrapper) {
-            if (isFollowupActive) {
-                followupWrapper.style.display = 'block';
-                if (followupBadge) {
-                    followupBadge.style.color = '#059669';
-                    followupBadge.style.background = '#ECFDF5';
-                    followupBadge.style.borderColor = '#A7F3D0';
-                    followupBadge.textContent = `SEQUENCE STEP 2 • AUTO FOLLOW-UP (${delayLabel})`;
-                }
-                if (followupText) {
-                    const textVal = inputFollowupText ? inputFollowupText.value : (activeFlow.followUp ? activeFlow.followUp.text : '');
-                    followupText.textContent = textVal.replace('{product}', activeFlow.cardTitle || 'this item');
-                    followupText.style.color = '#262626';
-                    followupText.style.fontStyle = 'normal';
-                }
-            } else {
-                followupWrapper.style.display = 'block';
-                if (followupBadge) {
-                    followupBadge.style.color = '#94A3B8';
-                    followupBadge.style.background = '#F1F5F9';
-                    followupBadge.style.borderColor = '#E2E8F0';
-                    followupBadge.textContent = `SEQUENCE STEP 2 • FOLLOW-UP PAUSED`;
-                }
-                if (followupText) {
-                    followupText.textContent = `(Automated follow-up line-up is paused for this keyword rule)`;
-                    followupText.style.color = '#94A3B8';
-                    followupText.style.fontStyle = 'italic';
-                }
-            }
+        const cardWelcome = (inputFlowMessage ? inputFlowMessage.value : activeFlow.welcomeText).replace('{name}', 'Sarah');
+        const cardTitle = inputCardTitle ? inputCardTitle.value : activeFlow.cardTitle;
+        const cardSubtitle = inputCardSubtitle ? inputCardSubtitle.value : activeFlow.cardSubtitle;
+        const cardPrice = inputCardPrice ? inputCardPrice.value : activeFlow.cardPrice;
+        const cardImg = inputCardImageUrl ? inputCardImageUrl.value : activeFlow.cardImg;
+
+        messagesArea.innerHTML = `
+            <div style="text-align:center; margin-bottom:8px;">
+                <span style="font-size:0.65rem; color:#8E8E8E; background:#EEEEEE; padding:2px 8px; border-radius:10px;">TODAY 12:45 PM</span>
+            </div>
+
+            <!-- User simulated incoming comment trigger -->
+            <div style="align-self:flex-end; background:#3797F0; color:white; padding:8px 12px; border-radius:18px; font-size:0.8rem; max-width:80%;">
+                ${activeFlow.simulatedCustomerComment || (activeFlow.keywords.length ? `${activeFlow.keywords[0]} please! Available in Medium?` : 'PRICE please!')}
+            </div>
+
+            <!-- Bot automated welcome message -->
+            <div class="ig-bubble-in">
+                <div style="background:#EFEFEF; color:#262626; padding:10px 12px; border-radius:18px; font-size:0.8rem;" id="simulatedMsgText">
+                    ${cardWelcome}
+                </div>
+
+                <!-- Product Card Attachment -->
+                <div class="ig-card-bubble">
+                    <img src="${cardImg}" alt="Product" class="ig-card-img" id="simulatedCardImg">
+                    <div class="ig-card-content">
+                        <div class="ig-card-title" id="simulatedCardTitle">${cardTitle}</div>
+                        <div class="ig-card-text" id="simulatedCardSubtitle">${cardSubtitle}</div>
+                        <div class="ig-card-price" id="simulatedCardPrice">${cardPrice}</div>
+                    </div>
+
+                    <!-- Interactive Buttons inside the card -->
+                    <div class="ig-interactive-buttons" id="simulatedButtonsContainer">
+                        ${activeFlow.buttons.map(btn => `
+                            <button type="button" class="ig-interactive-btn ${btn.action === 'in_dm_checkout' ? 'btn-whatsapp' : ''}" onclick="triggerSimulatedDmAction('${btn.action}', '${btn.text}')">
+                                ${btn.text}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 Timed Follow-Up Preview -->
+            <div class="ig-followup-preview-wrapper" id="simulatedFollowupWrapper" style="margin-top:14px; ${mode === 'card' && !isFollowupActive ? 'display:none;' : ''}">
+                <div style="text-align:center; margin-bottom:6px;">
+                    <span style="font-size:0.62rem; color:#059669; background:#ECFDF5; border:1px solid #A7F3D0; padding:2px 8px; border-radius:10px; font-weight:700;" id="simulatedFollowupBadge">
+                        SEQUENCE STEP 3 • AUTO FOLLOW-UP (${delayLabel})
+                    </span>
+                </div>
+                <div class="ig-bubble-in" id="simulatedFollowupBubble">
+                    <div style="background:#EFEFEF; color:#262626; padding:10px 12px; border-radius:18px; font-size:0.8rem; border-left:3px solid #10B981;" id="simulatedFollowupMsgText">
+                        ${followupMsg}
+                    </div>
+                </div>
+            </div>
+        `;
+
+        if (mode === 'followup') {
+            const followupWrapper = document.getElementById('simulatedFollowupWrapper');
+            if (followupWrapper) followupWrapper.style.display = 'block';
+            messagesArea.scrollTop = messagesArea.scrollHeight;
         }
     }
 
@@ -1334,14 +1586,14 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="btn-config-row" id="btn-cfg-${btn.id}">
                 <input type="text" class="form-input" style="padding:6px 10px; font-size:0.8rem;" value="${btn.text}" oninput="updateButtonText(${index}, this.value)">
                 <select class="form-select" style="padding:6px 10px; font-size:0.8rem;" onchange="updateButtonAction(${index}, this.value)">
+                    <option value="in_dm_checkout" ${btn.action === 'in_dm_checkout' ? 'selected' : ''}>Buy in DM (COD / UPI)</option>
                     <option value="modal_product" ${btn.action === 'modal_product' ? 'selected' : ''}>View Sizing Details</option>
                     <option value="coupon" ${btn.action === 'coupon' ? 'selected' : ''}>Reveal 15% Coupon Code</option>
-                    <option value="whatsapp" ${btn.action === 'whatsapp' ? 'selected' : ''}>WhatsApp Order Handoff (Free)</option>
                     <option value="human" ${btn.action === 'human' ? 'selected' : ''}>Request Human Support</option>
                 </select>
                 <select class="form-select" style="padding:6px 10px; font-size:0.8rem;" onchange="updateButtonStyle(${index}, this.value)">
                     <option value="default" ${btn.style === 'default' ? 'selected' : ''}>Blue Text</option>
-                    <option value="whatsapp" ${btn.style === 'whatsapp' ? 'selected' : ''}>WhatsApp Green</option>
+                    <option value="whatsapp" ${btn.style === 'whatsapp' ? 'selected' : ''}>Green Highlight</option>
                 </select>
                 <button type="button" class="btn-remove-row" title="Delete Button" onclick="removeButtonRow(${index})">&times;</button>
             </div>
@@ -1391,8 +1643,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const newBtnId = 'b' + (Date.now().toString().slice(-4));
             activeFlow.buttons.push({
                 id: newBtnId,
-                text: 'New Action Button',
-                action: 'coupon',
+                text: 'Buy in DM (COD / UPI)',
+                action: 'in_dm_checkout',
                 style: 'default'
             });
             saveAppState();
@@ -1400,6 +1652,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Step 1 Input Listeners
     if (inputFlowMessage) inputFlowMessage.addEventListener('input', () => {
         const af = getActiveFlow();
         if (af) af.welcomeText = inputFlowMessage.value;
@@ -1431,7 +1684,56 @@ document.addEventListener('DOMContentLoaded', () => {
         saveAppState();
     });
 
-    // Live Step 2 Follow-Up Listeners
+    // Step 2 In-DM Conversational Checkout Listeners
+    if (checkEnableInDmCheckout) {
+        checkEnableInDmCheckout.addEventListener('change', () => {
+            const af = getActiveFlow();
+            if (af && af.inDmOrder) af.inDmOrder.enabled = checkEnableInDmCheckout.checked;
+            saveAppState();
+        });
+    }
+    if (inputDmPromptSize) {
+        inputDmPromptSize.addEventListener('input', () => {
+            const af = getActiveFlow();
+            if (af && af.inDmOrder) af.inDmOrder.promptSize = inputDmPromptSize.value;
+            syncPhoneSimulator();
+            saveAppState();
+        });
+    }
+    if (inputDmPromptAddress) {
+        inputDmPromptAddress.addEventListener('input', () => {
+            const af = getActiveFlow();
+            if (af && af.inDmOrder) af.inDmOrder.promptAddress = inputDmPromptAddress.value;
+            syncPhoneSimulator();
+            saveAppState();
+        });
+    }
+    if (inputDmPromptPhone) {
+        inputDmPromptPhone.addEventListener('input', () => {
+            const af = getActiveFlow();
+            if (af && af.inDmOrder) af.inDmOrder.promptPhone = inputDmPromptPhone.value;
+            syncPhoneSimulator();
+            saveAppState();
+        });
+    }
+    if (inputDmPromptPayment) {
+        inputDmPromptPayment.addEventListener('input', () => {
+            const af = getActiveFlow();
+            if (af && af.inDmOrder) af.inDmOrder.promptPayment = inputDmPromptPayment.value;
+            syncPhoneSimulator();
+            saveAppState();
+        });
+    }
+    if (inputDmPromptConfirmation) {
+        inputDmPromptConfirmation.addEventListener('input', () => {
+            const af = getActiveFlow();
+            if (af && af.inDmOrder) af.inDmOrder.promptConfirmation = inputDmPromptConfirmation.value;
+            syncPhoneSimulator();
+            saveAppState();
+        });
+    }
+
+    // Live Step 3 Follow-Up Listeners
     if (checkEnableFollowup) {
         checkEnableFollowup.addEventListener('change', () => {
             const activeFlow = getActiveFlow();
@@ -1449,7 +1751,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (selectFollowupCondition) {
         selectFollowupCondition.addEventListener('change', () => {
             const activeFlow = getActiveFlow();
-            if (activeFlow.followUp) activeFlow.followUp.condition = selectFollowupCondition.value;
+            const cond = selectFollowupCondition.value;
+            if (activeFlow.followUp) {
+                activeFlow.followUp.condition = cond;
+                if (flowchartDropoffTemplates[cond]) {
+                    activeFlow.followUp.text = flowchartDropoffTemplates[cond];
+                    if (inputFollowupText) inputFollowupText.value = flowchartDropoffTemplates[cond];
+                }
+            }
+            const pills = document.querySelectorAll('#flowchartDropoffPills .flowchart-pill-btn');
+            pills.forEach(p => {
+                if (p.getAttribute('onclick') && p.getAttribute('onclick').includes(cond)) {
+                    p.classList.add('active');
+                } else {
+                    p.classList.remove('active');
+                }
+            });
+            syncPhoneSimulator();
+            saveAppState();
         });
     }
     if (inputFollowupText) {
@@ -1457,6 +1776,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const activeFlow = getActiveFlow();
             if (activeFlow.followUp) activeFlow.followUp.text = inputFollowupText.value;
             syncPhoneSimulator();
+        });
+    }
+    if (btnResetFollowupTemplate) {
+        btnResetFollowupTemplate.addEventListener('click', () => {
+            const cond = selectFollowupCondition ? selectFollowupCondition.value : 'no_order_complete';
+            const template = flowchartDropoffTemplates[cond] || flowchartDropoffTemplates['no_order_complete'];
+            if (inputFollowupText) inputFollowupText.value = template;
+            const activeFlow = getActiveFlow();
+            if (activeFlow.followUp) activeFlow.followUp.text = template;
+            saveAppState();
+            syncPhoneSimulator();
+            showToast('check', 'Loaded smart copy for selected drop-off condition');
         });
     }
 
@@ -1470,20 +1801,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 activeFlow.followUp.delayMinutes = parseInt(selectFollowupDelay.value);
                 activeFlow.followUp.text = inputFollowupText.value;
             }
+            if (activeFlow.inDmOrder) {
+                if (checkEnableInDmCheckout) activeFlow.inDmOrder.enabled = checkEnableInDmCheckout.checked;
+                if (inputDmPromptSize) activeFlow.inDmOrder.promptSize = inputDmPromptSize.value;
+                if (inputDmPromptAddress) activeFlow.inDmOrder.promptAddress = inputDmPromptAddress.value;
+                if (inputDmPromptPhone) activeFlow.inDmOrder.promptPhone = inputDmPromptPhone.value;
+                if (inputDmPromptPayment) activeFlow.inDmOrder.promptPayment = inputDmPromptPayment.value;
+                if (inputDmPromptConfirmation) activeFlow.inDmOrder.promptConfirmation = inputDmPromptConfirmation.value;
+            }
             saveAppState();
-            showToast('check', `Flow rules & line-up saved successfully for "${activeFlow.name}"!`);
+            showToast('check', `Flow rules & 12-step line-up saved successfully for "${activeFlow.name}"!`);
         });
     }
 
     window.triggerSimulatedDmAction = (action, label) => {
         playNotificationSound();
-        if (action === 'whatsapp') {
-            const waUrl = `https://wa.me/919876543210?text=${encodeURIComponent('Hi! I want to order from @sreee._.ram with zero fees!')}`;
-            alert(`WhatsApp Click-to-Chat:\n\nOpening URL:\n${waUrl}\n\nNotice: Zero Meta API fees charged! Direct customer handoff.`);
+        if (action === 'in_dm_checkout') {
+            appState.simMode = 'orderflow';
+            const simButtons = document.querySelectorAll('.sim-mode-btn');
+            simButtons.forEach(b => b.classList.toggle('active', b.getAttribute('data-mode') === 'orderflow'));
+            syncPhoneSimulator();
+            showToast('check', 'Customer tapped "Buy in DM" — conversational checkout started!');
         } else if (action === 'coupon') {
             alert(`Coupon Revealed:\n\nYour secret code is: INSTA15 (15% OFF at checkout)`);
         } else if (action === 'modal_product') {
-            alert(`Product Specifications:\n\nAuthentic quality with direct delivery.`);
+            alert(`Product Specifications:\n\nAvailable in S, M, L, XL with direct Instagram DM order.`);
         } else {
             alert(`Agent Connected:\n\nA representative has been notified and will take over this thread.`);
         }

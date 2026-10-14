@@ -435,7 +435,8 @@ def send_instagram_direct_message(
 async def handle_incoming_direct_message(sender_id: str, message_text: str):
     """
     Handles when an Instagram user sends a DM to @sreee._.ram.
-    Responds inside the 24h customer window and updates the CRM inbox in real-time.
+    Responds inside the 24h customer window ONLY IF a keyword matches.
+    If no trigger keyword was sent, skip auto-reply and do not add to CRM leads.
     """
     username = state.get("user_mappings", {}).get(str(sender_id))
     if not username or username in ["customer", "shopper"]:
@@ -446,9 +447,32 @@ async def handle_incoming_direct_message(sender_id: str, message_text: str):
     if not username:
         username = "shopper"
 
-    logger.info(f"INBOUND DM from @{username} (ID: {sender_id}): '{message_text}'")
+    # STRICT KEYWORD MATCHING:
+    # Check if the inbound message contains any active trigger keyword (PRICE, BUY, ORDER, HI, LINK, INFO, etc.)
+    text_upper = message_text.upper().strip()
+    matched_reel = None
+    matched_keyword = None
 
-    active_reel = state["reels"].get("18079", {})
+    for r_key, r_data in state.get("reels", {}).items():
+        if not r_data.get("active", True):
+            continue
+        for kw in r_data.get("keywords", []):
+            kw_clean = kw.strip().upper()
+            if kw_clean and kw_clean in text_upper:
+                matched_reel = r_data
+                matched_keyword = kw_clean
+                break
+        if matched_reel:
+            break
+
+    # If no keyword matched, DO NOT auto-reply and DO NOT create a CRM lead
+    if not matched_reel or not matched_keyword:
+        logger.info(f"INBOUND DM from @{username} (ID: {sender_id}): '{message_text}' contains no trigger keyword. Skipped auto-reply and CRM lead creation.")
+        return
+
+    logger.info(f"INBOUND DM KEYWORD MATCH from @{username} (ID: {sender_id}): '{message_text}' matched '{matched_keyword}' on {matched_reel.get('title')}")
+
+    active_reel = matched_reel
     wa_phone = active_reel.get("wa_phone", "919876543210")
     product_name = active_reel.get("wa_product", "Featured Item")
     wa_link = f"https://wa.me/{wa_phone}?text={urllib.parse.quote(f'Hi! I am messaging from Instagram @{username} to order {product_name}!')}"
@@ -492,8 +516,8 @@ async def handle_incoming_direct_message(sender_id: str, message_text: str):
             "reel": active_reel.get("title", "@sreee._.ram Reel #18079"),
             "phone": wa_phone,
             "ig_user_id": str(sender_id),
-            "tags": ["Instagram DM", "Replied", "Ready to Order"],
-            "notes": f"Customer sent DM: '{message_text}'. Bot sent WhatsApp handoff card.",
+            "tags": [f"Keyword Matched: {matched_keyword}", "Instagram DM", "Ready to Order"],
+            "notes": f"Customer sent keyword '{matched_keyword}' in DM: '{message_text}'. Bot sent WhatsApp handoff card.",
             "chat": [
                 {"from": "user", "text": message_text, "time": now_time},
                 {"from": "bot", "text": f"Tap below to order via WhatsApp: {wa_link}", "time": now_time}
@@ -512,9 +536,9 @@ async def handle_incoming_direct_message(sender_id: str, message_text: str):
 
     activity = {
         "user": f"@{username}",
-        "action": f"Sent DM \"{message_text}\"",
+        "action": f"Sent keyword \"{matched_keyword}\" in DM",
         "time": "Just now",
-        "badge": "DM Replied",
+        "badge": "Keyword Matched",
         "badgeClass": "badge-blue",
         "avatar": default_avatar
     }
@@ -606,13 +630,13 @@ async def process_incoming_comment(
     # Keyword check
     keywords = [k.upper().strip() for k in matched_rule.get("keywords", [])]
     text_upper = comment_text.upper()
-    has_match = any(kw in text_upper for kw in keywords)
+    matched_keyword = next((kw for kw in keywords if kw in text_upper), None)
 
-    if not has_match and len(keywords) > 0:
-        logger.info(f"Comment '{comment_text}' did not match keywords {keywords}")
+    if not matched_keyword:
+        logger.info(f"Comment '{comment_text}' did not match keywords {keywords}. Skipping auto-reply.")
         return
 
-    logger.info(f"MATCH FOUND: '{comment_text}' matched keywords on reel #{target_reel_key}!")
+    logger.info(f"MATCH FOUND: '{comment_text}' matched keyword '{matched_keyword}' on reel #{target_reel_key}!")
 
     # 1. Pick randomized public reply
     public_replies = matched_rule.get("public_replies", [
@@ -683,8 +707,8 @@ async def process_incoming_comment(
             "reel": matched_rule.get("title", f"Reel #{target_reel_key}"),
             "phone": wa_phone,
             "ig_user_id": str(user_id) if user_id else None,
-            "tags": ["Instagram Lead", "Auto-Replied", "Ready to Order"],
-            "notes": f"Automated reply sent: '{chosen_reply}' on {matched_rule.get('title')}.",
+            "tags": [f"Keyword Matched: {matched_keyword}", "Instagram Comment", "Ready to Order"],
+            "notes": f"Automated reply sent: '{chosen_reply}' on {matched_rule.get('title')} for keyword '{matched_keyword}'.",
             "chat": [
                 {"from": "user", "text": comment_text, "time": now_time},
                 {"from": "bot", "text": f"[Public Reply]: {chosen_reply}", "time": now_time},

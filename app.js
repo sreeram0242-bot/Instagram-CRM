@@ -290,10 +290,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     appState.reels = parsed.reels;
                 }
                 if (parsed.leads && Array.isArray(parsed.leads)) {
-                    // Filter out mock dummy leads and sanitize avatars
+                    // Only keep leads that actually matched a trigger keyword
                     appState.leads = parsed.leads
-                        .filter(l => l.handle !== '@david_k' && l.handle !== '@shopper' && l.handle !== '@customer')
+                        .filter(l => l.handle === '@gym_flow_offical' || (l.tags && l.tags.some(t => t.toLowerCase().includes('keyword'))))
                         .map(l => ({ ...l, avatar: getCustomerAvatar(l.handle, l.name, l.avatar) }));
+                    if (appState.leads.length !== parsed.leads.length) {
+                        parsed.leads = appState.leads;
+                        try { localStorage.setItem('instaflow_app_state', JSON.stringify(parsed)); } catch (_) {}
+                    }
                 }
                 if (parsed.recentActivities && Array.isArray(parsed.recentActivities)) {
                     appState.recentActivities = parsed.recentActivities
@@ -346,12 +350,19 @@ document.addEventListener('DOMContentLoaded', () => {
                             const sEl = document.getElementById('valApiSavingsSaved');
                             if (sEl) sEl.textContent = '$' + (serverState.metrics.api_savings || 0).toFixed(2);
                         }
-                        if (serverState.leads && Array.isArray(serverState.leads) && serverState.leads.length > 0) {
-                            appState.leads = serverState.leads.map(l => ({
-                                ...l,
-                                avatar: getCustomerAvatar(l.handle, l.name, l.avatar)
-                            }));
-                            appState.selectedLeadId = appState.leads[0].id;
+                        if (serverState.leads && Array.isArray(serverState.leads)) {
+                            appState.leads = serverState.leads
+                                .filter(l => l.handle === '@gym_flow_offical' || (l.tags && l.tags.some(t => t.toLowerCase().includes('keyword'))))
+                                .map(l => ({
+                                    ...l,
+                                    avatar: getCustomerAvatar(l.handle, l.name, l.avatar)
+                                }));
+                            appState.selectedLeadId = appState.leads.length > 0 ? appState.leads[0].id : null;
+                            try {
+                                const saved = JSON.parse(localStorage.getItem('instaflow_app_state') || '{}');
+                                saved.leads = appState.leads;
+                                localStorage.setItem('instaflow_app_state', JSON.stringify(saved));
+                            } catch (_) {}
                             renderCrmChat();
                         }
                         if (serverState.activities && Array.isArray(serverState.activities) && serverState.activities.length > 0) {
@@ -1496,7 +1507,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const txtLeadNotes = document.getElementById('txtLeadNotes');
         const btnDirectWaClick = document.getElementById('btnDirectWaClick');
 
-        const activeLead = appState.leads.find(l => l.id === appState.selectedLeadId) || appState.leads[0];
+        // Update Inbox Header Badge & Top Nav Pill
+        const inboxCountBadge = document.getElementById('inboxCountBadge');
+        if (inboxCountBadge) {
+            inboxCountBadge.textContent = `${appState.leads.length} ${appState.leads.length === 1 ? 'Lead' : 'Leads'}`;
+        }
+        const unreadBadge = document.getElementById('unreadInboxBadge');
+        if (unreadBadge) {
+            unreadBadge.textContent = `${appState.leads.length} New`;
+        }
+
+        // Validate selected lead id
+        if (!appState.leads.some(l => l.id === appState.selectedLeadId)) {
+            appState.selectedLeadId = appState.leads.length > 0 ? appState.leads[0].id : null;
+        }
+
+        const activeLead = appState.leads.find(l => l.id === appState.selectedLeadId) || (appState.leads.length > 0 ? appState.leads[0] : null);
 
         if (leadList) {
             if (appState.leads.length === 0) {

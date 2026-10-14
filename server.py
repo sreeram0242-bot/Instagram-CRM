@@ -152,6 +152,8 @@ def load_state() -> Dict[str, Any]:
         st["seen_comments"] = list(st.get("replied_comments", []))
     if "user_mappings" not in st:
         st["user_mappings"] = {}
+    if "order_sessions" not in st:
+        st["order_sessions"] = {}
     return st
 
 def save_state(state: Dict[str, Any]):
@@ -278,14 +280,14 @@ def send_private_instagram_dm(
                                 "image_url": card_image_url,
                                 "buttons": [
                                     {
-                                        "type": "web_url",
-                                        "url": wa_link,
-                                        "title": "Order on WhatsApp"[:20]
+                                        "type": "postback",
+                                        "title": "Buy in DM (COD/UPI)"[:20],
+                                        "payload": "START_IN_DM_ORDER"
                                     },
                                     {
                                         "type": "postback",
-                                        "title": "Chat with Us"[:20],
-                                        "payload": "CHAT_WITH_US"
+                                        "title": "Size & Sizing Info"[:20],
+                                        "payload": "VIEW_SIZING"
                                     }
                                 ]
                             }
@@ -312,17 +314,17 @@ def send_private_instagram_dm(
                     "type": "template",
                     "payload": {
                         "template_type": "button",
-                        "text": f"Hey @{username}! Thanks for checking out @sreee._.ram. Tap below to order with free delivery on WhatsApp:",
+                        "text": f"Hey @{username}! Thanks for checking out @sreee._.ram. Tap below to order directly in Instagram DM with Cash on Delivery or UPI:",
                         "buttons": [
                             {
-                                "type": "web_url",
-                                "url": wa_link,
-                                "title": "Order on WhatsApp"[:20]
+                                "type": "postback",
+                                "title": "Buy in DM (COD/UPI)"[:20],
+                                "payload": "START_IN_DM_ORDER"
                             },
                             {
                                 "type": "postback",
-                                "title": "Chat with Us"[:20],
-                                "payload": "CHAT_WITH_US"
+                                "title": "Size & Sizing Info"[:20],
+                                "payload": "VIEW_SIZING"
                             }
                         ]
                     }
@@ -390,14 +392,14 @@ def send_instagram_direct_message(
                                     "image_url": card_image_url or "https://petroleum-such-benz-graduated.trycloudflare.com/app_icon_1024.png",
                                     "buttons": [
                                         {
-                                            "type": "web_url",
-                                            "url": wa_link,
-                                            "title": "Order on WhatsApp"[:20]
+                                            "type": "postback",
+                                            "title": "Buy in DM (COD/UPI)"[:20],
+                                            "payload": "START_IN_DM_ORDER"
                                         },
                                         {
                                             "type": "postback",
-                                            "title": "Chat with Us"[:20],
-                                            "payload": "CHAT_WITH_US"
+                                            "title": "Size & Sizing Info"[:20],
+                                            "payload": "VIEW_SIZING"
                                         }
                                     ]
                                 }
@@ -418,7 +420,7 @@ def send_instagram_direct_message(
     try:
         payload = {
             "recipient": {"id": recipient_id},
-            "message": {"text": text or f"Thanks for reaching out! Tap here to order directly on WhatsApp with free delivery: {wa_link or 'https://wa.me/919876543210'}"}
+            "message": {"text": text or "Thanks for reaching out! Reply 'ORDER' to complete your order directly here in Instagram DM with Cash on Delivery or UPI!"}
         }
         res = requests.post(url, json=payload, headers=headers, timeout=10)
         if res.status_code == 200:
@@ -431,12 +433,12 @@ def send_instagram_direct_message(
 
     return False
 
-# Inbound DM & Postback Handlers (2-Way Live Chat)
+# Inbound DM & Postback Handlers (2-Way Live Chat & In-DM Conversational Checkout)
 async def handle_incoming_direct_message(sender_id: str, message_text: str):
     """
     Handles when an Instagram user sends a DM to @sreee._.ram.
-    Responds inside the 24h customer window ONLY IF a keyword matches.
-    If no trigger keyword was sent, skip auto-reply and do not add to CRM leads.
+    1. If the user is in an active in-DM order conversation, captures Size, Delivery Address, Phone, & Payment.
+    2. Otherwise, verifies keywords (PRICE, BUY, ORDER, HI) and initiates the In-DM order flow or sends Product Card.
     """
     username = state.get("user_mappings", {}).get(str(sender_id))
     if not username or username in ["customer", "shopper"]:
@@ -447,8 +449,129 @@ async def handle_incoming_direct_message(sender_id: str, message_text: str):
     if not username:
         username = "shopper"
 
-    # STRICT KEYWORD MATCHING:
-    # Check if the inbound message contains any active trigger keyword (PRICE, BUY, ORDER, HI, LINK, INFO, etc.)
+    if "order_sessions" not in state:
+        state["order_sessions"] = {}
+
+    now_time = "Just now"
+    default_avatar = generate_avatar_data_uri(username)
+
+    # 1. CHECK IF USER IS IN AN ACTIVE IN-DM ORDER FLOW
+    session = state["order_sessions"].get(str(sender_id))
+    if session and session.get("step"):
+        step = session.get("step")
+        lead = next((l for l in state["leads"] if l.get("handle") == f"@{username}" or l.get("ig_user_id") == str(sender_id)), None)
+        if not lead:
+            lead = {
+                "id": int(asyncio.get_event_loop().time() * 1000),
+                "handle": f"@{username}",
+                "name": username.replace("_", " ").title(),
+                "followers": "Real IG Customer",
+                "avatar": default_avatar,
+                "source": "ig",
+                "intent": "High Intent",
+                "lastMsg": message_text,
+                "time": now_time,
+                "reel": session.get("reel_title", "@sreee._.ram Reel #18079"),
+                "phone": "+91 919876543210",
+                "ig_user_id": str(sender_id),
+                "tags": ["In-DM Order", "Checkout Active"],
+                "notes": "Customer ordering inside Instagram DM.",
+                "chat": []
+            }
+            state["leads"].insert(0, lead)
+
+        lead["chat"].append({"from": "user", "text": message_text, "time": now_time})
+
+        if step == "awaiting_size":
+            session["size"] = message_text.strip()
+            session["step"] = "awaiting_address"
+            reply_text = f"Got it! Size [{message_text.strip()}] saved.\n\nNow please send your full Delivery Address and Pincode for shipping:"
+            send_instagram_direct_message(recipient_id=sender_id, text=reply_text)
+            lead["chat"].append({"from": "bot", "text": reply_text, "time": now_time})
+            lead["lastMsg"] = f"Size: {message_text.strip()}"
+            lead["notes"] = f"Size: {message_text.strip()}. Awaiting delivery address."
+
+        elif step == "awaiting_address":
+            session["address"] = message_text.strip()
+            session["step"] = "awaiting_phone"
+            reply_text = f"Delivery address saved!\n\nWhat is your contact Phone Number for courier delivery updates?"
+            send_instagram_direct_message(recipient_id=sender_id, text=reply_text)
+            lead["chat"].append({"from": "bot", "text": reply_text, "time": now_time})
+            lead["lastMsg"] = f"Address: {message_text.strip()[:30]}..."
+            lead["notes"] = f"Size: {session.get('size')}. Address: {session.get('address')}."
+
+        elif step == "awaiting_phone":
+            clean_phone = message_text.strip()
+            session["phone"] = clean_phone
+            session["step"] = "awaiting_payment"
+            reply_text = "Almost done! How would you like to pay?\n\nReply '1' for Cash on Delivery (COD)\nReply '2' for Instant UPI payment"
+            send_instagram_direct_message(recipient_id=sender_id, text=reply_text)
+            lead["chat"].append({"from": "bot", "text": reply_text, "time": now_time})
+            lead["phone"] = clean_phone
+            lead["lastMsg"] = f"Phone: {clean_phone}"
+            lead["notes"] = f"Size: {session.get('size')}. Address: {session.get('address')}. Phone: {clean_phone}."
+
+        elif step == "awaiting_payment":
+            pm = "Cash on Delivery (COD)" if ("1" in message_text or "COD" in message_text.upper()) else "Instant UPI"
+            session["payment"] = pm
+            order_id = f"#ORD-18079-{random.randint(100, 999)}"
+            session["order_id"] = order_id
+
+            reply_text = (
+                f"Order Confirmed!\n\n"
+                f"Order ID: {order_id}\n"
+                f"Product: {session.get('product')}\n"
+                f"Size: {session.get('size')}\n"
+                f"Delivery Address: {session.get('address')}\n"
+                f"Phone: {session.get('phone')}\n"
+                f"Payment Method: {pm}\n\n"
+                f"Thank you for shopping with @sreee._.ram! Your package is being prepared for dispatch."
+            )
+            send_instagram_direct_message(recipient_id=sender_id, text=reply_text)
+            lead["chat"].append({"from": "bot", "text": reply_text, "time": now_time})
+            lead["lastMsg"] = f"Order {order_id} Confirmed ({pm})"
+            lead["intent"] = "Order Placed"
+            lead["tags"] = ["In-DM Order", "COD Confirmed" if "COD" in pm else "UPI Confirmed", "Ready to Ship"]
+            lead["order"] = {
+                "id": order_id,
+                "status": "Confirmed",
+                "item": session.get("product", "Featured Item #18079"),
+                "size": session.get("size"),
+                "address": session.get("address"),
+                "phone": session.get("phone"),
+                "payment": pm,
+                "amount": session.get("price", "₹1,499")
+            }
+            lead["notes"] = f"IN-DM ORDER CONFIRMED: {order_id}. Size: {session.get('size')} | Address: {session.get('address')} | Phone: {session.get('phone')} | Payment: {pm}"
+
+            del state["order_sessions"][str(sender_id)]
+
+            state["metrics"]["whatsapp_orders"] = state["metrics"].get("whatsapp_orders", 0) + 1
+            save_state(state)
+
+            await manager.broadcast({
+                "type": "NEW_COMMENT_EVENT",
+                "user": f"@{username}",
+                "comment_text": f"[In-DM Order Confirmed]: {order_id}",
+                "reply_text": f"Confirmed {order_id} ({pm})",
+                "reel_title": session.get("reel_title"),
+                "metrics": state["metrics"],
+                "lead": lead
+            })
+            return
+
+        save_state(state)
+        await manager.broadcast({
+            "type": "NEW_COMMENT_EVENT",
+            "user": f"@{username}",
+            "comment_text": message_text,
+            "reply_text": reply_text,
+            "metrics": state["metrics"],
+            "lead": lead
+        })
+        return
+
+    # 2. STRICT KEYWORD MATCHING FOR NEW INBOUND DM
     text_upper = message_text.upper().strip()
     matched_reel = None
     matched_keyword = None
@@ -465,7 +588,6 @@ async def handle_incoming_direct_message(sender_id: str, message_text: str):
         if matched_reel:
             break
 
-    # If no keyword matched, DO NOT auto-reply and DO NOT create a CRM lead
     if not matched_reel or not matched_keyword:
         logger.info(f"INBOUND DM from @{username} (ID: {sender_id}): '{message_text}' contains no trigger keyword. Skipped auto-reply and CRM lead creation.")
         return
@@ -473,33 +595,34 @@ async def handle_incoming_direct_message(sender_id: str, message_text: str):
     logger.info(f"INBOUND DM KEYWORD MATCH from @{username} (ID: {sender_id}): '{message_text}' matched '{matched_keyword}' on {matched_reel.get('title')}")
 
     active_reel = matched_reel
-    wa_phone = active_reel.get("wa_phone", "919876543210")
-    product_name = active_reel.get("wa_product", "Featured Item")
-    wa_link = f"https://wa.me/{wa_phone}?text={urllib.parse.quote(f'Hi! I am messaging from Instagram @{username} to order {product_name}!')}"
 
-    card_title = active_reel.get("card_title", f"@{IG_USERNAME} Featured Item")
-    card_subtitle = active_reel.get("card_subtitle", "Exclusive Instagram special. Tap below to order on WhatsApp with free delivery.")
-    card_img = active_reel.get("card_img") or "https://petroleum-such-benz-graduated.trycloudflare.com/app_icon_1024.png"
-
-    reply_text = f"Hey @{username}! Thanks for reaching out to @sreee._.ram. Tap below to order directly on WhatsApp with zero fees: {wa_link}"
-
-    # Send 24h response back
-    send_instagram_direct_message(
-        recipient_id=sender_id,
-        text=reply_text,
-        card_title=card_title,
-        card_subtitle=card_subtitle,
-        card_image_url=card_img,
-        wa_link=wa_link
-    )
+    # If the customer said "ORDER" or "BUY", start conversational checkout immediately!
+    if any(k in text_upper for k in ["ORDER", "BUY", "PURCHASE", "BOOK"]):
+        state["order_sessions"][str(sender_id)] = {
+            "step": "awaiting_size",
+            "product": active_reel.get("card_title", "@sreee._.ram Featured Item"),
+            "reel_title": active_reel.get("title", "@sreee._.ram Reel #18079"),
+            "price": "₹1,499"
+        }
+        reply_text = f"Awesome @{username}! Let's get your order placed right here in Instagram DM.\n\nFirst, what SIZE or quantity do you need? (e.g. S, M, L, XL)"
+        send_instagram_direct_message(recipient_id=sender_id, text=reply_text)
+    else:
+        # Otherwise send Product Card with In-DM Checkout button
+        reply_text = f"Hey @{username}! Thanks for checking out @sreee._.ram. Tap 'Buy in DM' below to order directly in Instagram with Cash on Delivery or UPI!"
+        card_title = active_reel.get("card_title", f"@{IG_USERNAME} Featured Item")
+        card_subtitle = "Exclusive Instagram special. Tap below to order directly in chat."
+        card_img = active_reel.get("card_img") or "https://petroleum-such-benz-graduated.trycloudflare.com/app_icon_1024.png"
+        send_instagram_direct_message(
+            recipient_id=sender_id,
+            text=reply_text,
+            card_title=card_title,
+            card_subtitle=card_subtitle,
+            card_image_url=card_img
+        )
 
     # Update CRM State
     state["metrics"]["total_dms"] += 1
     state["metrics"]["whatsapp_orders"] += 1
-    state["metrics"]["api_savings"] = round(state["metrics"]["whatsapp_orders"] * 0.05, 2)
-
-    now_time = "Just now"
-    default_avatar = generate_avatar_data_uri(username)
 
     lead = next((l for l in state["leads"] if l.get("handle") == f"@{username}" or l.get("ig_user_id") == str(sender_id)), None)
     if not lead:
@@ -514,13 +637,13 @@ async def handle_incoming_direct_message(sender_id: str, message_text: str):
             "lastMsg": f"DM: '{message_text}'",
             "time": now_time,
             "reel": active_reel.get("title", "@sreee._.ram Reel #18079"),
-            "phone": wa_phone,
+            "phone": "+91 919876543210",
             "ig_user_id": str(sender_id),
-            "tags": [f"Keyword Matched: {matched_keyword}", "Instagram DM", "Ready to Order"],
-            "notes": f"Customer sent keyword '{matched_keyword}' in DM: '{message_text}'. Bot sent WhatsApp handoff card.",
+            "tags": [f"Keyword Matched: {matched_keyword}", "In-DM Checkout", "Ready to Order"],
+            "notes": f"Customer sent keyword '{matched_keyword}' in DM. Bot initiated in-DM ordering flow.",
             "chat": [
                 {"from": "user", "text": message_text, "time": now_time},
-                {"from": "bot", "text": f"Tap below to order via WhatsApp: {wa_link}", "time": now_time}
+                {"from": "bot", "text": reply_text, "time": now_time}
             ]
         }
         state["leads"].insert(0, lead)
@@ -530,15 +653,15 @@ async def handle_incoming_direct_message(sender_id: str, message_text: str):
             lead["handle"] = f"@{username}"
             lead["name"] = username.replace("_", " ").title()
         lead["chat"].append({"from": "user", "text": message_text, "time": now_time})
-        lead["chat"].append({"from": "bot", "text": f"Tap below to order via WhatsApp: {wa_link}", "time": now_time})
+        lead["chat"].append({"from": "bot", "text": reply_text, "time": now_time})
         lead["lastMsg"] = f"DM: '{message_text}'"
         lead["time"] = now_time
 
     activity = {
         "user": f"@{username}",
-        "action": f"Sent keyword \"{matched_keyword}\" in DM",
+        "action": f"Started in-DM checkout on {active_reel.get('title')}",
         "time": "Just now",
-        "badge": "Keyword Matched",
+        "badge": "In-DM Order",
         "badgeClass": "badge-blue",
         "avatar": default_avatar
     }
@@ -552,7 +675,7 @@ async def handle_incoming_direct_message(sender_id: str, message_text: str):
         "type": "NEW_COMMENT_EVENT",
         "user": f"@{username}",
         "comment_text": f"[Inbound DM]: {message_text}",
-        "reply_text": "[Product Card & Order Button Sent to DM]",
+        "reply_text": "[In-DM Checkout Card Dispatched]",
         "reel_title": active_reel.get("title"),
         "metrics": state["metrics"],
         "lead": lead,
@@ -561,16 +684,28 @@ async def handle_incoming_direct_message(sender_id: str, message_text: str):
 
 async def handle_incoming_postback_click(sender_id: str, payload: str, title: str):
     """
-    Handles when an Instagram user clicks an action button (e.g. 'Chat with Us').
+    Handles when an Instagram user clicks an action button (e.g. 'Buy in DM (COD/UPI)').
     """
     username = state.get("user_mappings", {}).get(str(sender_id), "shopper")
     logger.info(f"POSTBACK BUTTON CLICK from @{username} (ID: {sender_id}): '{title}' ({payload})")
 
-    active_reel = state["reels"].get("18079", {})
-    wa_phone = active_reel.get("wa_phone", "919876543210")
-    wa_link = f"https://wa.me/{wa_phone}?text={urllib.parse.quote('Hi! I tapped Chat with Us on Instagram. I want to connect with your team.')}"
+    if "order_sessions" not in state:
+        state["order_sessions"] = {}
 
-    reply_text = f"Thanks for tapping '{title}'! Our support team is online right now. Tap here to chat on WhatsApp: {wa_link}"
+    active_reel = state["reels"].get("18079", {})
+
+    if payload == "START_IN_DM_ORDER":
+        state["order_sessions"][str(sender_id)] = {
+            "step": "awaiting_size",
+            "product": active_reel.get("card_title", "@sreee._.ram Featured Item"),
+            "reel_title": active_reel.get("title", "@sreee._.ram Reel #18079"),
+            "price": "₹1,499"
+        }
+        reply_text = f"Awesome @{username}! Let's get your order placed right here in Instagram DM.\n\nFirst, what SIZE or quantity do you need? (e.g. S, M, L, XL)"
+    elif payload == "VIEW_SIZING":
+        reply_text = "Product Specifications:\n• Fabric: Premium Bio-Washed Cotton\n• Fit: Unisex Regular Comfort Fit\n• Available Sizes: S (38), M (40), L (42), XL (44)\n• Free Exchange & COD Available\n\nReply 'ORDER' or tap 'Buy in DM' to order right now!"
+    else:
+        reply_text = f"Thanks for tapping '{title}'! Our staff is online right now to assist you directly in this chat."
 
     send_instagram_direct_message(
         recipient_id=sender_id,
@@ -578,14 +713,13 @@ async def handle_incoming_postback_click(sender_id: str, payload: str, title: st
     )
 
     state["metrics"]["button_clicks"] = state["metrics"].get("button_clicks", 0) + 1
-    state["metrics"]["whatsapp_orders"] += 1
     save_state(state)
 
     await manager.broadcast({
         "type": "NEW_COMMENT_EVENT",
         "user": f"@{username}",
         "comment_text": f"[Button Tap]: {title}",
-        "reply_text": "Connected to WhatsApp Support",
+        "reply_text": reply_text[:60],
         "metrics": state["metrics"]
     })
 
@@ -659,10 +793,10 @@ async def process_incoming_comment(
     wa_link = f"https://wa.me/{wa_phone}?text={urllib.parse.quote(f'Hi! I want to order {product_name} from your Instagram reel!')}"
     
     card_title = matched_rule.get("card_title", f"@{IG_USERNAME} Featured Item")
-    card_subtitle = matched_rule.get("card_subtitle", "Exclusive Instagram special. Tap below to order on WhatsApp with free delivery.")
+    card_subtitle = "Exclusive Instagram special. Tap 'Buy in DM' below to order with COD or UPI."
     card_img = matched_rule.get("card_img") or "https://petroleum-such-benz-graduated.trycloudflare.com/app_icon_1024.png"
     
-    dm_text = f"Hey @{commenter_username}! Thanks for your comment on @sreee._.ram. Tap here to order directly on WhatsApp with free delivery: {wa_link}"
+    dm_text = f"Hey @{commenter_username}! Thanks for your comment on @sreee._.ram. Tap 'Buy in DM' below or reply 'ORDER' to complete your order directly here in Instagram!"
 
     # Send DM with Rich Cards & Native Buttons!
     send_private_instagram_dm(

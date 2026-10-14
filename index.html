@@ -154,14 +154,14 @@
                 </button>
             </div>
 
-            <!-- Cost Savings Banner -->
+            <!-- In-Instagram Native Commerce Banner -->
             <div style="font-size:0.78rem; font-weight:700; color:#059669; background:#ECFDF5; border:1px solid rgba(16,185,129,0.3); padding:5px 12px; border-radius:9999px; display:flex; align-items:center; gap:6px;">
                 <span class="svg-icon">
                     <svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        <polyline points="20 6 9 17 4 12"></polyline>
                     </svg>
                 </span>
-                <span>WhatsApp API Fee: <strong>$0.00 (100% Free via IG + wa.me)</strong></span>
+                <span>In-Instagram Native DM Orders: <strong>100% In-App Conversational Checkout</strong></span>
             </div>
         </div>
     </nav>
@@ -673,11 +673,11 @@
                             </div>
                         </div>
                         <div style="display:flex; gap:8px;">
-                            <button type="button" class="btn-outline-blue" id="btnSendWaLinkNow" style="padding:6px 12px; font-size:0.75rem;">
+                            <button type="button" class="btn-primary" id="btnSendDmOrderForm" style="padding:6px 12px; font-size:0.75rem;">
                                 <span class="svg-icon">
-                                    <svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    <svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
                                 </span>
-                                <span>Handoff to WhatsApp</span>
+                                <span>Send In-DM Order Prompt</span>
                             </button>
                         </div>
                     </div>
@@ -698,7 +698,7 @@
                     </div>
                 </div>
 
-                <!-- Col 3: Lead Profile & WhatsApp Generator -->
+                <!-- Col 3: Lead Profile & In-DM Order Status -->
                 <div class="inbox-profile-col" id="inboxProfileCol">
                     <div class="profile-avatar-center">
                         <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgdmlld0JveD0nMCAwIDY0IDY0Jz48Y2lyY2xlIGN4PSczMicgY3k9JzMyJyByPSczMicgZmlsbD0nIzI1NjNFQicvPjxwYXRoIGQ9J00yMCA0NGMwLTYuNjI3IDUuMzczLTEyIDEyLTEyczEyIDUuMzczIDEyIDEyaC0yNHonIGZpbGw9JyNmZmZmZmYnLz48Y2lyY2xlIGN4PSczMicgY3k9JzI0JyByPSc4JyBmaWxsPScjZmZmZmZmJy8+PC9zdmc+" alt="Lead" class="profile-avatar-lg" id="profileDetailAvatar">
@@ -715,15 +715,26 @@
                         </div>
                     </div>
 
-                    <div style="background:#FFFFFF; border:1px solid #E2E8F0; padding:12px; border-radius:8px; margin-bottom:14px;">
-                        <span style="font-size:0.75rem; font-weight:700; color:#475569;">Free WhatsApp Order Bridge:</span>
-                        <p style="font-size:0.75rem; color:#64748B; margin:4px 0 8px;">Direct link opens customer's WhatsApp with cart pre-filled:</p>
-                        <a href="#" target="_blank" class="btn-primary" id="btnDirectWaClick" style="width:100%; justify-content:center; background:#10B981; font-size:0.8rem; padding:8px;">
+                    <!-- In-DM Order Details Card -->
+                    <div style="background:#FFFFFF; border:1px solid #E2E8F0; padding:12px; border-radius:8px; margin-bottom:14px;" id="inDmOrderCard">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                            <span style="font-size:0.75rem; font-weight:700; color:#1E293B;">In-Instagram Order:</span>
+                            <span class="activity-badge badge-green" id="orderStatusBadge">Confirmed</span>
+                        </div>
+                        <div style="font-size:0.75rem; font-weight:600; color:#2563EB; margin-bottom:6px;" id="orderIdText">Order #ORD-18079-108</div>
+                        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:6px; padding:8px; font-size:0.75rem; color:#334155; margin-bottom:8px;">
+                            <div><strong>Item:</strong> <span id="orderItemName">Featured Item #18079</span></div>
+                            <div style="margin-top:2px;"><strong>Size:</strong> <span id="orderSizeVal">Medium (M)</span></div>
+                            <div style="margin-top:2px;"><strong>Delivery Address:</strong> <span id="orderAddressVal">12/4 Anna Nagar, Chennai - 600040</span></div>
+                            <div style="margin-top:2px;"><strong>Phone:</strong> <span id="orderPhoneVal">+91 919876543210</span></div>
+                            <div style="margin-top:2px;"><strong>Payment:</strong> <span id="orderPaymentVal">Cash on Delivery (COD)</span></div>
+                        </div>
+                        <button type="button" class="btn-primary" id="btnConfirmDmOrder" style="width:100%; justify-content:center; background:#2563EB; font-size:0.78rem; padding:8px;">
                             <span class="svg-icon">
-                                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
                             </span>
-                            <span>Open in WhatsApp</span>
-                        </a>
+                            <span id="btnConfirmDmOrderText">Mark Shipped in DM</span>
+                        </button>
                     </div>
 
                     <div class="form-group">

@@ -60,14 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         cardSubtitle: "Exclusive Instagram special. Tap below to order on WhatsApp with free delivery.",
                         cardImg: "https://instagram.fcjb5-2.fna.fbcdn.net/v/t51.82787-15/625353792_18109568698678282_8862091652716458602_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=isiwkIG1UD0Q7kNvwG9xqXq&_nc_oc=AdqbZdMA0KB4Me3Ad7ZctTY6qHlTc4CSU5OZKPE1aA10WaOo_MjumYj4y4CDHc3idl_5SDAGl5xmu76RhwGKeRSW&_nc_zt=23&_nc_ht=instagram.fcjb5-2.fna&edm=ANo9K5cEAAAA&_nc_gid=0tKJfokSn17KYfj5jgQT_g&_nc_tpa=Q5bMBQK0OQNU2LfHBtb4h4tBvAQr4Z-KMgI6e7q381WTN4NxBR4PriWs2HNco7QbCLQbWXiTj4HgnUiUlQ&oh=00_AQNubswwcvOUJLPJ7cssuwm_yVNlZ6ZvExi7LGE6uS9xYw&oe=6AD4FE64",
                         buttons: [
-                            { id: 'b_ram1', text: 'Order via WhatsApp (Free)', action: 'whatsapp', style: 'whatsapp' },
-                            { id: 'b_ram2', text: 'Chat with Us', action: 'human', style: 'default' }
+                            { id: 'b_ram1', text: 'Buy in DM (COD / UPI)', action: 'in_dm_checkout', style: 'default' },
+                            { id: 'b_ram2', text: 'Size & Sizing Info', action: 'modal_product', style: 'default' }
                         ],
                         followUp: {
                             enabled: true,
                             condition: 'no_click',
                             delayMinutes: 15,
-                            text: "Still interested? Tap below to connect with us directly on WhatsApp:"
+                            text: "Still interested? Reply 'ORDER' to complete your order directly here in Instagram DM!"
                         }
                     }
                 ]
@@ -91,16 +91,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 flows: [
                     {
                         id: 'flow-ram-18027-buy',
-                        name: 'Direct WhatsApp Checkout',
+                        name: 'Direct In-DM Checkout',
                         keywords: ['BUY', 'ORDER', 'LINK', 'DISCOUNT', 'PURCHASE'],
-                        simulatedCustomerComment: 'Ready to BUY! Send me the checkout link please.',
-                        welcomeText: "Awesome {name}! Tap below to complete your order directly through WhatsApp:",
-                        cardTitle: "Instant WhatsApp Checkout",
-                        cardPrice: "Direct WhatsApp Order",
-                        cardSubtitle: "Zero fees, cash-on-delivery or card accepted. One-click order handoff.",
+                        simulatedCustomerComment: 'Ready to BUY! How to order?',
+                        welcomeText: "Awesome {name}! Tap below to complete your order directly here in Instagram DM:",
+                        cardTitle: "Instant In-DM Checkout",
+                        cardPrice: "Direct In-DM Order",
+                        cardSubtitle: "Zero fees, cash-on-delivery or UPI accepted. Complete order in chat.",
                         cardImg: "https://instagram.fcjb5-2.fna.fbcdn.net/v/t51.82787-15/622031438_18071182853150794_2132939138682287551_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=QzolASHqaboQ7kNvwEgbW9Q&_nc_oc=Adq8VrJj2-FjynjeRMy9Q91ZxCDVZfSTDvXqdQRHplxo2l69hwB5o3ZmOxx5GQI_6efpbl4J2Lq_-coqHY-knM5r&_nc_zt=23&_nc_ht=instagram.fcjb5-2.fna&edm=ANo9K5cEAAAA&_nc_gid=0tKJfokSn17KYfj5jgQT_g&_nc_tpa=Q5bMBQIgqavOmyaTO96hxgKSJ_5GA1FC_xvmrASwfN89aO6C318wZ0IvbYQykMvhjSF0-llw8G_iLGxIyg&oh=00_AQOtco3fJJlVh59rw0_ID71qFVrBubHet4pY72jTlN_emQ&oe=6AD5217F",
                         buttons: [
-                            { id: 'b_ram3', text: 'Open WhatsApp Checkout', action: 'whatsapp', style: 'whatsapp' }
+                            { id: 'b_ram3', text: 'Buy in DM (COD / UPI)', action: 'in_dm_checkout', style: 'default' }
                         ],
                         followUp: {
                             enabled: true,
@@ -1591,9 +1591,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 `).join('');
             }
 
-            if (btnDirectWaClick) {
-                const waUrl = `https://wa.me/${activeLead.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi ${activeLead.name}, here is your order confirmation link for ${activeLead.reel}!`)}`;
-                btnDirectWaClick.href = waUrl;
+            // Bind In-DM Order Details Card
+            const orderCard = document.getElementById('inDmOrderCard');
+            const orderStatusBadge = document.getElementById('orderStatusBadge');
+            const orderIdText = document.getElementById('orderIdText');
+            const orderItemName = document.getElementById('orderItemName');
+            const orderSizeVal = document.getElementById('orderSizeVal');
+            const orderAddressVal = document.getElementById('orderAddressVal');
+            const orderPhoneVal = document.getElementById('orderPhoneVal');
+            const orderPaymentVal = document.getElementById('orderPaymentVal');
+            const btnConfirmDmOrderText = document.getElementById('btnConfirmDmOrderText');
+
+            if (activeLead && activeLead.order) {
+                if (orderCard) orderCard.style.display = 'block';
+                if (orderStatusBadge) {
+                    orderStatusBadge.textContent = activeLead.order.status || 'Confirmed';
+                    orderStatusBadge.className = activeLead.order.status === 'Shipped' ? 'activity-badge badge-blue' : 'activity-badge badge-green';
+                }
+                if (orderIdText) orderIdText.textContent = `Order ${activeLead.order.id || '#ORD-18079-108'}`;
+                if (orderItemName) orderItemName.textContent = activeLead.order.item || activeLead.reel;
+                if (orderSizeVal) orderSizeVal.textContent = activeLead.order.size || 'Medium (M)';
+                if (orderAddressVal) orderAddressVal.textContent = activeLead.order.address || 'Address provided';
+                if (orderPhoneVal) orderPhoneVal.textContent = activeLead.order.phone || activeLead.phone;
+                if (orderPaymentVal) orderPaymentVal.textContent = activeLead.order.payment || 'Cash on Delivery (COD)';
+                if (btnConfirmDmOrderText) {
+                    btnConfirmDmOrderText.textContent = activeLead.order.status === 'Shipped' ? 'Order Already Dispatched' : 'Mark Shipped in DM';
+                }
+            } else if (orderCard) {
+                orderCard.style.display = 'block';
+                if (orderStatusBadge) orderStatusBadge.textContent = 'In Progress';
+                if (orderIdText) orderIdText.textContent = 'In-DM Order';
             }
         } else {
             const defaultAvatar = getCustomerAvatar('Guest', 'Guest');
@@ -1612,6 +1639,61 @@ document.addEventListener('DOMContentLoaded', () => {
         appState.selectedLeadId = leadId;
         renderCrmChat();
     };
+
+    // In-DM Order Shipment Confirmation Trigger
+    const btnConfirmDmOrder = document.getElementById('btnConfirmDmOrder');
+    if (btnConfirmDmOrder) {
+        btnConfirmDmOrder.addEventListener('click', () => {
+            const activeLead = appState.leads.find(l => l.id === appState.selectedLeadId);
+            if (!activeLead) return;
+            if (!activeLead.order) {
+                activeLead.order = {
+                    id: `#ORD-18079-${Math.floor(100 + Math.random() * 900)}`,
+                    status: 'Shipped',
+                    item: activeLead.reel,
+                    size: 'Medium (M)',
+                    address: 'Verified Customer Address',
+                    phone: activeLead.phone || '+91 919876543210',
+                    payment: 'Cash on Delivery (COD)',
+                    amount: '₹1,499'
+                };
+            } else {
+                activeLead.order.status = 'Shipped';
+            }
+            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            activeLead.chat.push({
+                from: 'bot',
+                text: `Package Update: Your order ${activeLead.order.id} has been marked as SHIPPED via Express Delivery! Tracking ID: DTDC-${Math.floor(100000 + Math.random() * 900000)}.`,
+                time: timeStr
+            });
+            activeLead.tags = activeLead.tags.filter(t => !t.includes('Ready to Ship'));
+            activeLead.tags.push('Order Shipped');
+            activeLead.lastMsg = `Order ${activeLead.order.id} Dispatched`;
+            renderCrmChat();
+            saveAppState();
+            playNotificationSound();
+            showToast('check', `Order marked as Shipped! Automated shipping notice dispatched to customer in Instagram DM.`);
+        });
+    }
+
+    // In-DM Order Prompt Button Trigger
+    const btnSendDmOrderForm = document.getElementById('btnSendDmOrderForm');
+    if (btnSendDmOrderForm) {
+        btnSendDmOrderForm.addEventListener('click', () => {
+            const activeLead = appState.leads.find(l => l.id === appState.selectedLeadId);
+            if (!activeLead) return;
+            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            activeLead.chat.push({
+                from: 'bot',
+                text: `In-DM Order Prompt:\n\nTap 'Buy in DM' or reply with your preferred Size & Delivery Address to confirm your order right here!`,
+                time: timeStr
+            });
+            renderCrmChat();
+            saveAppState();
+            playNotificationSound();
+            showToast('zap', `Dispatched In-DM Order Form to ${activeLead.handle}!`);
+        });
+    }
 
     const btnSendManualReply = document.getElementById('btnSendManualReply');
     const inputManualReply = document.getElementById('inputManualReply');

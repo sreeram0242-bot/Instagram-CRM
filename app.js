@@ -351,9 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 ...l,
                                 avatar: getCustomerAvatar(l.handle, l.name, l.avatar)
                             }));
-                            if (!appState.selectedLeadId || !appState.leads.some(l => l.id === appState.selectedLeadId)) {
-                                appState.selectedLeadId = appState.leads[0].id;
-                            }
+                            appState.selectedLeadId = appState.leads[0].id;
                             renderCrmChat();
                         }
                         if (serverState.activities && Array.isArray(serverState.activities) && serverState.activities.length > 0) {
@@ -1769,14 +1767,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 tags: ['Inbound Lead', keyword, 'Active DM'],
                 notes: `Customer triggered automated flow on ${reelTitle} using keyword "${keyword}".`,
                 chat: [
-                    { from: 'user', text: `${keyword}! How to order?`, time: nowTime },
-                    { from: 'bot', text: `Hey! Thanks for commenting on our post on @sreee._.ram. Tap below to order on WhatsApp with zero fees:`, time: nowTime }
+                    { from: 'user', text: keyword, time: nowTime },
+                    { from: 'bot', text: `Hey ${chosenUser}! Thanks for your comment on @sreee._.ram. Tap below to order on WhatsApp with zero fees: https://wa.me/919876543210`, time: nowTime }
                 ]
             };
             appState.leads.unshift(lead);
         } else {
-            lead.chat.push({ from: 'user', text: `${keyword}!`, time: nowTime });
-            lead.chat.push({ from: 'bot', text: `Details sent! Tap below to open your free WhatsApp order link.`, time: nowTime });
+            lead.chat.push({ from: 'user', text: keyword, time: nowTime });
+            lead.chat.push({ from: 'bot', text: `Tap below to order via WhatsApp: https://wa.me/919876543210`, time: nowTime });
             lead.time = 'Just now';
             lead.lastMsg = `Commented "${keyword}"`;
         }

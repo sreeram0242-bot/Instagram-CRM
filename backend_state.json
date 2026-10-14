@@ -1,0 +1,368 @@
+{
+  "replied_comments": [
+    "18367013341246191",
+    "18135944275661141",
+    "18119384266964645"
+  ],
+  "metrics": {
+    "total_comments": 2,
+    "total_dms": 2,
+    "button_clicks": 0,
+    "whatsapp_orders": 2,
+    "api_savings": 0.1
+  },
+  "reels": {
+    "18079": {
+      "mediaId": "18079921717678282",
+      "title": "@sreee._.ram Reel #18079",
+      "active": true,
+      "keywords": [
+        "PRICE",
+        "COST",
+        "HOW MUCH",
+        "DISCOUNT",
+        "ORDER",
+        "HI"
+      ],
+      "public_replies": [
+        "Check your DM! Details sent directly.",
+        "Sent details to your inbox! Check your DM.",
+        "DM sent! Tap inside to order directly."
+      ],
+      "dm_welcome": "Hey {name}! Thanks for checking out our post on @sreee._.ram. Here are the product details:",
+      "card_title": "@sreee._.ram Featured Item",
+      "card_subtitle": "Exclusive Instagram special. Tap below to order on WhatsApp with free delivery. [Verified]",
+      "card_img": "https://instagram.fcjb5-2.fna.fbcdn.net/v/t51.82787-15/625353792_18109568698678282_8862091652716458602_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=isiwkIG1UD0Q7kNvwG9xqXq&_nc_oc=AdqbZdMA0KB4Me3Ad7ZctTY6qHlTc4CSU5OZKPE1aA10WaOo_MjumYj4y4CDHc3idl_5SDAGl5xmu76RhwGKeRSW&_nc_zt=23&_nc_ht=instagram.fcjb5-2.fna&edm=ANo9K5cEAAAA&_nc_gid=0tKJfokSn17KYfj5jgQT_g&_nc_tpa=Q5bMBQK0OQNU2LfHBtb4h4tBvAQr4Z-KMgI6e7q381WTN4NxBR4PriWs2HNco7QbCLQbWXiTj4HgnUiUlQ&oh=00_AQNubswwcvOUJLPJ7cssuwm_yVNlZ6ZvExi7LGE6uS9xYw&oe=6AD4FE64",
+      "wa_product": "Featured Item #18079",
+      "wa_phone": "919876543210"
+    },
+    "18027": {
+      "mediaId": "18027861731150794",
+      "title": "@sreee._.ram Reel #18027",
+      "active": true,
+      "keywords": [
+        "BUY",
+        "ORDER",
+        "LINK",
+        "DISCOUNT",
+        "PURCHASE"
+      ],
+      "public_replies": [
+        "DM sent with details and order link!",
+        "Check your DM! Details sent directly."
+      ],
+      "dm_welcome": "Awesome {name}! Tap below to complete your order directly through WhatsApp:",
+      "wa_product": "Featured Item #18027",
+      "wa_phone": "919876543210",
+      "card_title": "Instant WhatsApp Checkout",
+      "card_subtitle": "Zero fees, cash-on-delivery or card accepted. One-click order handoff.",
+      "card_img": "https://instagram.fcjb5-2.fna.fbcdn.net/v/t51.82787-15/622031438_18071182853150794_2132939138682287551_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=QzolASHqaboQ7kNvwEgbW9Q&_nc_oc=Adq8VrJj2-FjynjeRMy9Q91ZxCDVZfSTDvXqdQRHplxo2l69hwB5o3ZmOxx5GQI_6efpbl4J2Lq_-coqHY-knM5r&_nc_zt=23&_nc_ht=instagram.fcjb5-2.fna&edm=ANo9K5cEAAAA&_nc_gid=0tKJfokSn17KYfj5jgQT_g&_nc_tpa=Q5bMBQIgqavOmyaTO96hxgKSJ_5GA1FC_xvmrASwfN89aO6C318wZ0IvbYQykMvhjSF0-llw8G_iLGxIyg&oh=00_AQOtco3fJJlVh59rw0_ID71qFVrBubHet4pY72jTlN_emQ&oe=6AD5217F"
+    },
+    "17863": {
+      "mediaId": "17863107759056247",
+      "title": "@sreee._.ram Post #17863",
+      "active": true,
+      "keywords": [
+        "PRICE",
+        "INFO",
+        "LINK",
+        "DETAILS"
+      ],
+      "public_replies": [
+        "Check your DM! Details sent.",
+        "Sent details to your inbox!"
+      ],
+      "dm_welcome": "Hey {name}! Thanks for checking out our post on @sreee._.ram. Tap below for details:",
+      "wa_product": "Featured Item #17863",
+      "wa_phone": "919876543210",
+      "card_title": "@sreee._.ram Post Item",
+      "card_subtitle": "Tap below to chat with us directly on WhatsApp.",
+      "card_img": "https://instagram.fcjb5-1.fna.fbcdn.net/v/t39.30808-6/428696610_17992437959532039_8077601449564876331_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=Y612p6Wj8IAQ7kNvwEFDKjg&_nc_oc=AdqT-KHuzIZz_4nc1oYk4xs2myRrTkraJNlS4GFI_WvN1UYKYLwqCMe4-SjJPxxqkoDXaAEYGIu0LMi3LstajpoB&_nc_zt=23&_nc_ht=instagram.fcjb5-1.fna&edm=ANo9K5cEAAAA&_nc_gid=hWh6dPJsqEFC2ENHFiP4mg&_nc_tpa=Q5bMBQJvcoRlIuxet2zHk-Mo8QzC39aeIUpCfi1V3eqb6Zv0NU_dPkbpkqiNMu9oqpTGvhOdgxukRweZWQ&oh=00_AQMfmP60BfHlY3RNahNee7wx1StEhlZQC9fBJyGqemv9GQ&oe=6AD5074B"
+    },
+    "18000": {
+      "mediaId": "18000775964034572",
+      "title": "@sreee._.ram Post #18000",
+      "active": true,
+      "keywords": [
+        "ORDER",
+        "BUY",
+        "LINK",
+        "PRICE"
+      ],
+      "public_replies": [
+        "DM sent! Check your inbox.",
+        "Details sent to your DM directly."
+      ],
+      "dm_welcome": "Hey {name}! Thanks for reaching out. Tap below to connect on WhatsApp:",
+      "wa_product": "Featured Item #18000",
+      "wa_phone": "919876543210",
+      "card_title": "@sreee._.ram Post Item",
+      "card_subtitle": "Tap below to chat with us directly on WhatsApp.",
+      "card_img": "https://instagram.fcjb5-2.fna.fbcdn.net/v/t39.30808-6/398728571_17978557583532039_4745018970682696672_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=riL_J6XqVDYQ7kNvwFrlmtk&_nc_oc=AdokM5wrw-zYFldu05_Cbn1UMdhhiZ7em97G2Vxv6wP2NoKG0zdAdgueGsKDMURxxM82g40WOOzmegk1ZNE2v4AH&_nc_zt=23&_nc_ht=instagram.fcjb5-2.fna&edm=ANo9K5cEAAAA&_nc_gid=hWh6dPJsqEFC2ENHFiP4mg&_nc_tpa=Q5bMBQJs0ahs8j2PLXnWbfc59SrFC5QwriMDcPwvrPRrOFn4yug9WBqLD7TUCtQHG7R4LLVaSyH38K1HJA&oh=00_AQOuk1G_fxNIz42Kgy453EJRRiz6tq6zlUVxqJ30cR7xbA&oe=6AD50EA7"
+    }
+  },
+  "leads": [
+    {
+      "id": 18079001,
+      "handle": "@_jaxsuxya_09",
+      "name": "Jayasurya",
+      "followers": "Real IG Customer",
+      "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjODMzQUI0Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0ZEMUQxRCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLFJvYm90byxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPko8L3RleHQ+Cjwvc3ZnPg==",
+      "source": "ig",
+      "intent": "High Intent",
+      "lastMsg": "Commented \"\ud83d\ude4c\u2764\ufe0f\" on @sreee._.ram Reel #18079",
+      "time": "Just now",
+      "reel": "@sreee._.ram Reel #18079",
+      "phone": "919876543210",
+      "ig_user_id": "1754390998968975",
+      "tags": [
+        "Inbound Lead",
+        "Active DM",
+        "Verified IG User"
+      ],
+      "notes": "Customer commented '\ud83d\ude4c\u2764\ufe0f' on @sreee._.ram Reel #18079. Automated reply sent and direct WhatsApp handoff offer delivered in DM.",
+      "chat": [
+        {
+          "from": "user",
+          "text": "\ud83d\ude4c\u2764\ufe0f Interested in this! How to order?",
+          "time": "09:08 PM"
+        },
+        {
+          "from": "bot",
+          "text": "Hey @_jaxsuxya_09! Thanks for checking out our post on @sreee._.ram. Tap below to order on WhatsApp with zero fees:",
+          "time": "09:08 PM"
+        },
+        {
+          "from": "bot",
+          "text": "[Product Card]: @sreee._.ram Featured Item #18079 - Tap 'Order on WhatsApp' to complete.",
+          "time": "09:09 PM"
+        }
+      ]
+    },
+    {
+      "id": 18027002,
+      "handle": "@gousickhawk",
+      "name": "Gousick Hawk",
+      "followers": "Real IG Customer",
+      "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDU5NjY5Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzEwQjk4MSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLFJvYm90byxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPkc8L3RleHQ+Cjwvc3ZnPg==",
+      "source": "ig",
+      "intent": "High Intent",
+      "lastMsg": "Commented \"\u2764\ufe0f\u2764\ufe0f\u2764\ufe0f\ud83d\udd25\" on Reel #18027",
+      "time": "4m ago",
+      "reel": "@sreee._.ram Reel #18027",
+      "phone": "919876543210",
+      "ig_user_id": "2347184246018908",
+      "tags": [
+        "Instagram Lead",
+        "Hot Inquiry",
+        "Ready to Buy"
+      ],
+      "notes": "Customer commented '\u2764\ufe0f\u2764\ufe0f\u2764\ufe0f\ud83d\udd25' on Reel #18027. Instant WhatsApp order bridge link sent with 15% discount.",
+      "chat": [
+        {
+          "from": "user",
+          "text": "\u2764\ufe0f\u2764\ufe0f\u2764\ufe0f\ud83d\udd25 What is the price and discount for this reel item?",
+          "time": "09:02 PM"
+        },
+        {
+          "from": "bot",
+          "text": "Hey @gousickhawk! Thanks for reaching out. We sent you 15% discount link on WhatsApp: https://wa.me/919876543210?text=Hi%21%20I%20am%20messaging%20from%20Instagram%20%40gousickhawk%20to%20order%20Featured%20Item%20%2318027%21",
+          "time": "09:02 PM"
+        }
+      ]
+    },
+    {
+      "id": 17863003,
+      "handle": "@__vickiyyy__",
+      "name": "Vicky",
+      "followers": "Real IG Customer",
+      "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDg5MUIyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzA2QjZENCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLFJvYm90byxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPlY8L3RleHQ+Cjwvc3ZnPg==",
+      "source": "ig",
+      "intent": "High Intent",
+      "lastMsg": "Commented \"\ud83e\udec2\u2764\ufe0f\u200d\ud83d\udd25\" on Post #17863",
+      "time": "12m ago",
+      "reel": "@sreee._.ram Post #17863",
+      "phone": "919876543210",
+      "ig_user_id": "1419294913650985",
+      "tags": [
+        "Inbound Lead",
+        "Active DM",
+        "Size-M"
+      ],
+      "notes": "Customer commented on Post #17863. Inquired about Medium size availability.",
+      "chat": [
+        {
+          "from": "user",
+          "text": "Do you have Medium size available in stock?",
+          "time": "08:55 PM"
+        },
+        {
+          "from": "bot",
+          "text": "Yes! Medium is in stock with same-day dispatch. Tap below to order on WhatsApp with free delivery.",
+          "time": "08:56 PM"
+        }
+      ]
+    },
+    {
+      "id": 16189004,
+      "handle": "@isiddd_",
+      "name": "Isiddd",
+      "followers": "Real IG Customer",
+      "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDI4NEM3Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzI1NjNFQiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLFJvYm90byxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPkk8L3RleHQ+Cjwvc3ZnPg==",
+      "source": "ig",
+      "intent": "High Intent",
+      "lastMsg": "Commented \"\u2764\ufe0f\u2764\ufe0f\" on Reel #18079",
+      "time": "20m ago",
+      "reel": "@sreee._.ram Reel #18079",
+      "phone": "919876543210",
+      "ig_user_id": "1618985113297064",
+      "tags": [
+        "Instagram Lead",
+        "Auto-Replied",
+        "Ready to Order"
+      ],
+      "notes": "Active commenter across Reels #18079 and #18027.",
+      "chat": [
+        {
+          "from": "user",
+          "text": "\u2764\ufe0f\u2764\ufe0f Love this style!",
+          "time": "08:42 PM"
+        },
+        {
+          "from": "bot",
+          "text": "Hey @isiddd_! Glad you loved it! Direct order link: https://wa.me/919876543210",
+          "time": "08:42 PM"
+        }
+      ]
+    },
+    {
+      "id": 19998005,
+      "handle": "@gym_flow_offical",
+      "name": "Gym Flow Official",
+      "followers": "Real IG Customer",
+      "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDI4NEM3Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzI1NjNFQiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLFJvYm90byxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPkc8L3RleHQ+Cjwvc3ZnPg==",
+      "source": "ig",
+      "intent": "High Intent",
+      "lastMsg": "Commented \"Hi\" on @sreee._.ram Reel #18079",
+      "time": "25m ago",
+      "reel": "@sreee._.ram Reel #18079",
+      "phone": "919876543210",
+      "tags": [
+        "Inbound Lead",
+        "Active DM",
+        "Order Intent"
+      ],
+      "notes": "Customer triggered automated flow on @sreee._.ram Reel #18079 using keyword \"HI\".",
+      "chat": [
+        {
+          "from": "user",
+          "text": "Hi! How much for this item?",
+          "time": "08:35 PM"
+        },
+        {
+          "from": "bot",
+          "text": "Hey @gym_flow_offical! Thanks for checking out our post on @sreee._.ram. Tap below to order on WhatsApp with zero fees:",
+          "time": "08:35 PM"
+        }
+      ]
+    }
+  ],
+  "activities": [
+    {
+      "user": "@_jaxsuxya_09",
+      "action": "Commented \"\ud83d\ude4c\u2764\ufe0f\" on @sreee._.ram Reel #18079",
+      "time": "Just now",
+      "badge": "Auto-Replied",
+      "badgeClass": "badge-blue",
+      "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjODMzQUI0Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0ZEMUQxRCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLFJvYm90byxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPko8L3RleHQ+Cjwvc3ZnPg=="
+    },
+    {
+      "user": "@gousickhawk",
+      "action": "Commented \"\u2764\ufe0f\u2764\ufe0f\u2764\ufe0f\ud83d\udd25\" on @sreee._.ram Reel #18027",
+      "time": "4m ago",
+      "badge": "DM Sent",
+      "badgeClass": "badge-blue",
+      "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDU5NjY5Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzEwQjk4MSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLFJvYm90byxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPkc8L3RleHQ+Cjwvc3ZnPg=="
+    },
+    {
+      "user": "@__vickiyyy__",
+      "action": "Sent DM \"Do you have Medium size available?\"",
+      "time": "12m ago",
+      "badge": "DM Replied",
+      "badgeClass": "badge-blue",
+      "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDg5MUIyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzA2QjZENCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLFJvYm90byxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPlY8L3RleHQ+Cjwvc3ZnPg=="
+    },
+    {
+      "user": "@isiddd_",
+      "action": "Commented \"\u2764\ufe0f\u2764\ufe0f\" on @sreee._.ram Reel #18079",
+      "time": "20m ago",
+      "badge": "Auto-Replied",
+      "badgeClass": "badge-blue",
+      "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDI4NEM3Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzI1NjNFQiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLFJvYm90byxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPkk8L3RleHQ+Cjwvc3ZnPg=="
+    },
+    {
+      "user": "@gym_flow_offical",
+      "action": "Commented \"Hi\" on @sreee._.ram Reel #18079",
+      "time": "25m ago",
+      "badge": "Auto-Replied",
+      "badgeClass": "badge-blue",
+      "avatar": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDI4NEM3Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzI1NjNFQiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNTAiIGZpbGw9InVybCgjZ3JhZCkiLz4KICA8dGV4dCB4PSI1MCIgeT0iNTAiIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLEJsaW5rTWFjU3lzdGVtRm9udCwnU2Vnb2UgVUknLFJvYm90byxIZWx2ZXRpY2Esc2Fucy1zZXJpZiIgZm9udC1zaXplPSI0NiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPkc8L3RleHQ+Cjwvc3ZnPg=="
+    }
+  ],
+  "settings": {
+    "waPhone": "919876543210",
+    "waTemplate": "Hi! I want to order the {product} (Reel #{reel_id}) with my 15% DM discount. My size is Medium."
+  },
+  "seen_comments": [
+    "18367013341246191",
+    "18135944275661141",
+    "18119384266964645",
+    "18086254120608906",
+    "17904701199035653",
+    "18280715386240450",
+    "18073367839603631",
+    "18041005207909617",
+    "18140537722360182",
+    "17885528334103569",
+    "18004317284382163",
+    "18037099330806750",
+    "18017421520944775",
+    "18045311701624647",
+    "18299426275199322",
+    "18057787723486587",
+    "18014332447993647",
+    "17886664424924633",
+    "18244762543225970",
+    "18393597025055169",
+    "18059058697434611",
+    "17858107545017296",
+    "18012785833945794",
+    "18003530456135523",
+    "17910891743837747",
+    "18011817952981352",
+    "17998315616212789",
+    "18105970459347293",
+    "17919425180807212",
+    "18029317114656988"
+  ],
+  "user_mappings": {
+    "17841445961158125": "sreee._.ram",
+    "1754390998968975": "_jaxsuxya_09",
+    "1618985113297064": "isiddd_",
+    "2347184246018908": "gousickhawk",
+    "1144404627920719": "_deva_d___",
+    "1600533907824334": "__itz_vikki__",
+    "1106891012309432": "kumarexh_._",
+    "1337648776106291": "s4zti_",
+    "1134036495872636": "__.rx._.sugash._",
+    "2642899369479399": "_pikazuu__",
+    "1419294913650985": "__vickiyyy__",
+    "2315243392582609": "_black__devil_143_",
+    "1455355176655052": "lovely_hacker_17",
+    "1134225275837048": "neverrr.mmindd_",
+    "1051205577968551": "mani._.ramesh",
+    "2207549406460385": "_ryuk_18",
+    "1090936027060607": "_divakar.01_",
+    "1952144049504350": "__imharishhhh"
+  }
+}

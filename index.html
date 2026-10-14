@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstaFlow CRM - Instagram & WhatsApp Automated Commerce</title>
+    <!-- Main Design System -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563EB' stroke-width='2.2'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/></svg>">
+</head>
+<body id="appBody">
+
+    <!-- ==========================================================================
+         TOP APP HEADER & PERSONA SWITCHER (ZERO EMOJIS - PURE SVG ICONS)
+         ========================================================================== -->
+    <header class="app-header" id="mainHeader">
+        <div class="header-container">
+            <div class="brand-section">
+                <div class="brand-logo" id="brandLogo">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </div>
+                <div class="brand-title" id="brandTitle">
+                    <span>InstaFlow</span><span style="color:#2563EB;">CRM</span>
+                    <span class="brand-badge" id="personaBadge">Shop Owner</span>
+                </div>
+            </div>
+
+            <!-- Role Persona Switcher -->
+            <div class="persona-switcher-box" id="personaSwitcher">
+                <span class="persona-label">Persona Mode:</span>
+                <div class="persona-pill-group">
+                    <button type="button" class="persona-btn active" data-persona="shop" id="btnPersonaShop">
+                        <span class="svg-icon">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                <path d="M16 10a4 4 0 0 1-8 0"></path>
+                            </svg>
+                        </span>
+                        <span>Shop Owner</span>
+                    </button>
+                    <button type="button" class="persona-btn" data-persona="creator" id="btnPersonaCreator">
+                        <span class="svg-icon">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                        </span>
+                        <span>Influencer</span>
+                    </button>
+                    <button type="button" class="persona-btn" data-persona="agency" id="btnPersonaAgency">
+                        <span class="svg-icon">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
+                        </span>
+                        <span>Agency</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Header Right Actions -->
+            <div class="header-actions">
+                <div class="api-pill" id="metaApiPill" title="Instagram Messaging Webhooks Active">
+                    <span class="pulse-dot"></span>
+                    <span>Meta Graph API Connected</span>
+                </div>
+                <button type="button" class="btn-simulate-webhook" id="btnTriggerSimulatedComment" title="Simulate a real Instagram reel comment event">
+                    <span class="svg-icon">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                    </span>
+                    <span>Simulate Reel Comment</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+         FROSTED GLASSMORPHISM NAVIGATION TABS (SVG ICONS)
+         ========================================================================== -->
+    <nav class="glass-nav-wrapper" id="glassNavWrapper">
+        <div class="glass-nav-container">
+            <div class="glass-nav-tabs" id="glassNavTabs">
+                <button type="button" class="glass-tab-btn active" data-tab="tabDashboard" id="tabBtnDashboard">
+                    <span class="svg-icon">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="7" height="9"></rect>
+                            <rect x="14" y="3" width="7" height="5"></rect>
+                            <rect x="14" y="12" width="7" height="9"></rect>
+                            <rect x="3" y="16" width="7" height="5"></rect>
+                        </svg>
+                    </span>
+                    <span>Dashboard</span>
+                </button>
+                <button type="button" class="glass-tab-btn" data-tab="tabReels" id="tabBtnReels">
+                    <span class="svg-icon">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                            <line x1="7" y1="2" x2="7" y2="22"></line>
+                            <line x1="17" y1="2" x2="17" y2="22"></line>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <line x1="2" y1="7" x2="7" y2="7"></line>
+                            <line x1="2" y1="17" x2="7" y2="17"></line>
+                            <line x1="17" y1="17" x2="22" y2="17"></line>
+                            <line x1="17" y1="7" x2="22" y2="7"></line>
+                        </svg>
+                    </span>
+                    <span>Reels Automation</span>
+                    <span class="tab-badge-mini">4 Live</span>
+                </button>
+                <button type="button" class="glass-tab-btn" data-tab="tabBuilder" id="tabBtnBuilder">
+                    <span class="svg-icon">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </span>
+                    <span>DM Flow Builder</span>
+                </button>
+                <button type="button" class="glass-tab-btn" data-tab="tabCrm" id="tabBtnCrm">
+                    <span class="svg-icon">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
+                            <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
+                        </svg>
+                    </span>
+                    <span>CRM &amp; Inbox</span>
+                    <span class="tab-badge-mini" id="unreadInboxBadge" style="background:#64748B; color:white;">0 New</span>
+                </button>
+                <button type="button" class="glass-tab-btn" data-tab="tabCatalog" id="tabBtnCatalog">
+                    <span class="svg-icon">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line>
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                        </svg>
+                    </span>
+                    <span>Product Catalog</span>
+                </button>
+                <button type="button" class="glass-tab-btn" data-tab="tabSettings" id="tabBtnSettings">
+                    <span class="svg-icon">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                    </span>
+                    <span>Settings &amp; Webhooks</span>
+                </button>
+            </div>
+
+            <!-- Cost Savings Banner -->
+            <div style="font-size:0.78rem; font-weight:700; color:#059669; background:#ECFDF5; border:1px solid rgba(16,185,129,0.3); padding:5px 12px; border-radius:9999px; display:flex; align-items:center; gap:6px;">
+                <span class="svg-icon">
+                    <svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    </svg>
+                </span>
+                <span>WhatsApp API Fee: <strong>$0.00 (100% Free via IG + wa.me)</strong></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==========================================================================
+         MAIN APPLICATION TABS CONTENT
+         ========================================================================== -->
+    <main class="app-main" id="appMain">
+
+        <!-- ======================================================================
+             TAB 1: EXECUTIVE DASHBOARD
+             ====================================================================== -->
+        <section class="tab-panel active" id="tabDashboard">
+            <div class="section-header-box" id="dashboardHeaderBox">
+                <div>
+                    <h1 class="section-title" id="dashTitle">Executive Commerce Overview</h1>
+                    <p class="section-desc" id="dashDesc">Real-time performance across Instagram Reels comment triggers, automated DMs, and WhatsApp sales handoffs.</p>
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <button type="button" class="btn-secondary" id="btnExportReport">
+                        <span class="svg-icon">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                        </span>
+                        <span>Export CSV</span>
+                    </button>
+                    <button type="button" class="btn-primary" id="btnQuickNewReel">
+                        <span class="svg-icon">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </span>
+                        <span>Connect New Reel</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Metrics Grid -->
+            <div class="metrics-grid" id="metricsGrid">
+                <div class="metric-card" id="metricCardComments">
+                    <div class="metric-header">
+                        <div class="metric-icon-box">
+                            <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                            </svg>
+                        </div>
+                        <span class="metric-pill">Live Sync</span>
+                    </div>
+                    <div class="metric-val" id="valTotalComments">0</div>
+                    <div class="metric-title">Reel Comments Caught</div>
+                </div>
+
+                <div class="metric-card" id="metricCardDms">
+                    <div class="metric-header">
+                        <div class="metric-icon-box">
+                            <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </div>
+                        <span class="metric-pill">100% Free wa.me</span>
+                    </div>
+                    <div class="metric-val" id="valTotalDms">0</div>
+                    <div class="metric-title">Instant DMs Sent</div>
+                </div>
+
+                <div class="metric-card" id="metricCardCtr">
+                    <div class="metric-header">
+                        <div class="metric-icon-box">
+                            <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"></path>
+                                <path d="M13 13l6 6"></path>
+                            </svg>
+                        </div>
+                        <span class="metric-pill">High Intent</span>
+                    </div>
+                    <div class="metric-val" id="valButtonClicks">0</div>
+                    <div class="metric-title">Button Clicks in DMs</div>
+                </div>
+
+                <div class="metric-card" id="metricCardWhatsapp">
+                    <div class="metric-header">
+                        <div class="metric-icon-box">
+                            <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                            </svg>
+                        </div>
+                        <span class="metric-pill" style="background:#DBEAFE; color:#2563EB;">Direct Handoff</span>
+                    </div>
+                    <div class="metric-val" id="valWhatsappHandoffs">0</div>
+                    <div class="metric-title">WhatsApp Orders Started</div>
+                </div>
+
+                <div class="metric-card metric-savings-highlight" id="metricCardSavings">
+                    <div class="metric-header">
+                        <div class="metric-icon-box">
+                            <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                        <span class="metric-pill">Zero Cloud Fees</span>
+                    </div>
+                    <div class="metric-val" id="valApiSavingsSaved">$0.00</div>
+                    <div class="metric-title">Saved vs. WhatsApp Cloud API</div>
+                </div>
+            </div>
+
+            <!-- Split Grid: Live Activity Feed + Top Converting Reels -->
+            <div class="dashboard-split-grid" id="dashSplitGrid">
+                <!-- Live Event Stream -->
+                <div class="content-card" id="cardActivityStream">
+                    <div class="card-title-row">
+                        <h2 class="card-title">
+                            <span class="svg-icon">
+                                <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                </svg>
+                            </span>
+                            <span>Live Reel Activity Stream</span>
+                        </h2>
+                        <span style="font-size:0.75rem; color:#10B981; font-weight:700;">Active WebSocket</span>
+                    </div>
+                    <div class="activity-feed-list" id="activityFeedList">
+                        <!-- Activity items injected dynamically -->
+                    </div>
+                </div>
+
+                <!-- Top Converting Reels Leaderboard -->
+                <div class="content-card" id="cardTopReels">
+                    <div class="card-title-row">
+                        <h2 class="card-title">
+                            <span class="svg-icon">
+                                <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="8" r="7"></circle>
+                                    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                                </svg>
+                            </span>
+                            <span>Top Converting Reels</span>
+                        </h2>
+                        <span style="font-size:0.75rem; color:#64748B;">Last 7 Days</span>
+                    </div>
+                    <div class="leaderboard-list" id="leaderboardList">
+                        <!-- Leaderboard items -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             TAB 2: REELS AUTOMATION ENGINE
+             ====================================================================== -->
+        <section class="tab-panel" id="tabReels">
+            <div class="section-header-box" id="reelsHeaderBox">
+                <div>
+                    <h1 class="section-title">Instagram Reels Automation Manager</h1>
+                    <p class="section-desc">Manage all posted Instagram Reels. Configure customized keyword triggers, public replies, and private DM flows for each reel separately.</p>
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <button type="button" class="btn-secondary" id="btnSyncInstagramReels" title="Fetch live reels from connected Instagram account @sreee._.ram">
+                        <span class="svg-icon">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 4 23 10 17 10"></polyline>
+                                <polyline points="1 20 1 14 7 14"></polyline>
+                                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                            </svg>
+                        </span>
+                        <span>Sync Reels (@sreee._.ram)</span>
+                    </button>
+                    <button type="button" class="btn-primary" id="btnOpenReelModal">
+                        <span class="svg-icon">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </span>
+                        <span>Add Reel Automation</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Reel Filter & Search Bar -->
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px; background:#F8FAFC; padding:12px 16px; border-radius:12px; border:1px solid #E2E8F0;">
+                <div style="display:flex; gap:6px;">
+                    <button type="button" class="activity-badge badge-blue" style="border:none; cursor:pointer;" id="filterReelsAll">All Reels (4)</button>
+                    <button type="button" class="activity-badge" style="background:#FFFFFF; color:#475569; border:1px solid #CBD5E1; cursor:pointer;" id="filterReelsActive">Active Triggers (4)</button>
+                    <button type="button" class="activity-badge" style="background:#FFFFFF; color:#475569; border:1px solid #CBD5E1; cursor:pointer;" id="filterReelsPaused">Paused (0)</button>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <input type="text" class="form-input" id="inputSearchReels" placeholder="Search reels by title or keyword..." style="width:280px; padding:6px 12px; font-size:0.82rem;">
+                </div>
+            </div>
+
+            <!-- Reels Cards Grid -->
+            <div class="reels-grid" id="reelsGalleryGrid">
+                <!-- Reel Cards rendered dynamically -->
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             TAB 3: SMART DM FLOW & BUTTON BUILDER (PER-REEL & MULTI-KEYWORD LINE-UP)
+             ====================================================================== -->
+        <section class="tab-panel" id="tabBuilder">
+            <div class="section-header-box" id="builderHeaderBox">
+                <div>
+                    <h1 class="section-title">Visual DM Flow &amp; Keyword Line-Up Builder</h1>
+                    <p class="section-desc">Set specific automated chat flows for each keyword group. Build a sequential line-up for instant responses and follow-ups.</p>
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <button type="button" class="btn-secondary" id="btnResetFlow">
+                        <span class="svg-icon">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="1 4 1 10 7 10"></polyline>
+                                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                            </svg>
+                        </span>
+                        <span>Reset Defaults</span>
+                    </button>
+                    <button type="button" class="btn-primary" id="btnSaveFlow">
+                        <span class="svg-icon">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                <polyline points="7 3 7 8 15 8"></polyline>
+                            </svg>
+                        </span>
+                        <span>Save Flow Rules</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Target Reel Selector Bar -->
+            <div class="flow-selector-bar" id="flowTargetReelBar">
+                <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                    <span style="font-size:0.84rem; font-weight:700; color:#1E293B;">Target Instagram Reel:</span>
+                    <select class="form-select" id="selectBuilderTargetReel" style="width:280px; padding:6px 12px; font-weight:600;">
+                        <!-- Options injected dynamically from appState.reels -->
+                    </select>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span class="activity-badge badge-green" id="activeReelStatusPill">Automations Active</span>
+                    <button type="button" class="btn-secondary" id="btnSwitchToReelsTab" style="padding:6px 12px; font-size:0.75rem;">View All Reels</button>
+                </div>
+            </div>
+
+            <!-- Keyword Flow Rules Switcher Tabs -->
+            <div style="margin-bottom:12px;">
+                <span class="form-label" style="margin-bottom:6px; display:block;">Select Keyword Flow Rule to Customize:</span>
+                <div class="flow-keyword-tabs" id="flowKeywordTabs">
+                    <!-- Flow rule buttons rendered dynamically -->
+                </div>
+            </div>
+
+            <div class="flow-builder-container" id="flowBuilderContainer">
+                <!-- Left: Flow Configurator & Line-Up -->
+                <div class="builder-settings-panel" id="flowConfigPanel">
+
+                    <!-- Keyword Trigger Pills Editor -->
+                    <div class="content-card" id="cardFlowKeywords">
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                            <h3 class="card-title">Trigger Keywords for this Flow</h3>
+                            <span style="font-size:0.75rem; color:#64748B;">Match Type: <strong>Contains Any Keyword</strong></span>
+                        </div>
+                        <p class="section-desc" style="margin-bottom:10px;">When a user comments ANY of these keywords on this reel, this exact automated response sequence is triggered:</p>
+                        
+                        <div class="keyword-pills-editor" id="keywordPillsContainer">
+                            <!-- Keyword pills rendered dynamically -->
+                        </div>
+                        <div style="display:flex; gap:8px; margin-top:8px;">
+                            <input type="text" class="form-input" id="inputNewKeyword" placeholder="Type a new keyword (e.g. DISCOUNT, SIZE, LINK) and click Add..." style="padding:8px 12px; font-size:0.82rem;">
+                            <button type="button" class="btn-outline-blue" id="btnAddKeywordBtn" style="white-space:nowrap; padding:8px 14px;">+ Add Keyword</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 1: LINE-UP SEQUENCE (IMMEDIATE RESPONSE) -->
+                    <div class="content-card" id="cardLineupStep1" style="border-left:4px solid #2563EB;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+                            <span class="lineup-step-badge">Sequence Step 1: Immediate Response</span>
+                            <span style="font-size:0.75rem; color:#64748B;">Delay: <strong>Instant (0s)</strong></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Private Welcome Greeting (Tags: {name}, {product}, {price}):</label>
+                            <textarea class="form-textarea" id="inputFlowMessage" rows="3">Hey {name}! Thanks for commenting on our reel. Here are the exclusive product details and a special 15% discount link:</textarea>
+                        </div>
+
+                        <div style="border-top:1px solid #E2E8F0; padding-top:12px; margin-top:12px;">
+                            <label class="form-label" style="margin-bottom:8px; display:block;">Product Card Preview Attachment:</label>
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                                <div class="form-group">
+                                    <label class="form-label">Product Title:</label>
+                                    <input type="text" class="form-input" id="inputCardTitle" value="@sreee._.ram Featured Item">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Price Display:</label>
+                                    <input type="text" class="form-input" id="inputCardPrice" value="DM for Pricing">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Card Subtitle / Description:</label>
+                                <input type="text" class="form-input" id="inputCardSubtitle" value="Exclusive Instagram special. Tap below to order on WhatsApp with free delivery.">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Product Image URL:</label>
+                                <input type="text" class="form-input" id="inputCardImageUrl" value="https://instagram.fcjb5-2.fna.fbcdn.net/v/t51.82787-15/625353792_18109568698678282_8862091652716458602_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=isiwkIG1UD0Q7kNvwG9xqXq&_nc_oc=AdqbZdMA0KB4Me3Ad7ZctTY6qHlTc4CSU5OZKPE1aA10WaOo_MjumYj4y4CDHc3idl_5SDAGl5xmu76RhwGKeRSW&_nc_zt=23&_nc_ht=instagram.fcjb5-2.fna&edm=ANo9K5cEAAAA&_nc_gid=0tKJfokSn17KYfj5jgQT_g&_nc_tpa=Q5bMBQK0OQNU2LfHBtb4h4tBvAQr4Z-KMgI6e7q381WTN4NxBR4PriWs2HNco7QbCLQbWXiTj4HgnUiUlQ&oh=00_AQNubswwcvOUJLPJ7cssuwm_yVNlZ6ZvExi7LGE6uS9xYw&oe=6AD4FE64">
+                            </div>
+                        </div>
+
+                        <!-- Interactive Buttons -->
+                        <div style="border-top:1px solid #E2E8F0; padding-top:12px; margin-top:12px;">
+                            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                                <label class="form-label">Interactive Buttons (Up to 4):</label>
+                                <button type="button" class="btn-outline-blue" id="btnAddInteractiveButton" style="padding:3px 8px; font-size:0.72rem;">+ Add Button</button>
+                            </div>
+                            <div class="interactive-button-editor" id="buttonEditorList">
+                                <!-- Dynamic Button Rows -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Line-up Connector Arrow -->
+                    <div class="lineup-arrow-connector">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </div>
+
+                    <!-- STEP 2: LINE-UP SEQUENCE (AUTOMATED TIMED FOLLOW-UP) -->
+                    <div class="content-card" id="cardLineupStep2" style="border-left:4px solid #10B981;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+                            <span class="lineup-step-badge" style="background:#ECFDF5; color:#059669;">Sequence Step 2: Automated Follow-Up Line-Up</span>
+                            <label style="display:flex; align-items:center; gap:6px; font-size:0.75rem; font-weight:700; color:#1E293B; cursor:pointer;">
+                                <input type="checkbox" id="checkEnableFollowup" checked style="accent-color:#10B981;">
+                                <span>Enable Line-Up Follow-up</span>
+                            </label>
+                        </div>
+                        <p class="section-desc" style="margin-bottom:10px;">Automatically sends a gentle follow-up sequence if the customer has not clicked or checked out after opening the DM:</p>
+
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+                            <div class="form-group">
+                                <label class="form-label">Follow-up Trigger Condition:</label>
+                                <select class="form-select" id="selectFollowupCondition">
+                                    <option value="no_click">If no button clicked in DM</option>
+                                    <option value="no_wa">If WhatsApp checkout not initiated</option>
+                                    <option value="always">Send to all commenters</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Follow-up Delay Timer:</label>
+                                <select class="form-select" id="selectFollowupDelay">
+                                    <option value="15">After 15 minutes</option>
+                                    <option value="60">After 1 hour</option>
+                                    <option value="240">After 4 hours</option>
+                                    <option value="1440">After 24 hours</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Follow-up Message Copy (Includes extra incentive):</label>
+                            <textarea class="form-textarea" id="inputFollowupText" rows="2">Still thinking about the {product}? We just unlocked free worldwide shipping for your order! Use code FREESHIP at checkout:</textarea>
+                        </div>
+                    </div>
+
+                    <!-- Timing & Anti-Spam Safety -->
+                    <div class="content-card" id="cardFlowTiming">
+                        <h3 class="card-title" style="margin-bottom:10px;">Human Simulation &amp; Anti-Spam Timing</h3>
+                        <div class="form-group">
+                            <label class="form-label">Simulated Typing Delay: <strong id="typingDelayDisplay" style="color:#2563EB;">3.5 seconds</strong></label>
+                            <input type="range" class="form-input" id="sliderTypingDelay" min="1" max="10" step="0.5" value="3.5" style="accent-color:#2563EB;">
+                            <small class="hud-hint-dim" style="color:#64748B;">Adds a realistic typing delay so your Instagram account never gets flagged for bot activity.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Realistic iPhone Instagram DM Simulator -->
+                <div class="phone-mockup-wrapper" id="phoneWrapper">
+                    <div class="iphone-frame" id="iphoneMockupFrame">
+                        <div class="iphone-notch"></div>
+                        <div class="iphone-screen">
+                            <!-- Instagram Header -->
+                            <div class="ig-dm-header">
+                                <span class="svg-icon" style="color:#262626;">
+                                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                </span>
+                                <div class="ig-dm-user">
+                                    <div class="ig-dm-avatar">IF</div>
+                                    <div>
+                                        <div class="ig-dm-name">sreee._.ram</div>
+                                        <div style="font-size:0.68rem; color:#8E8E8E;">Active now</div>
+                                    </div>
+                                </div>
+                                <span class="svg-icon" style="color:#262626;">
+                                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                                </span>
+                            </div>
+
+                            <!-- Chat Messages Area -->
+                            <div class="ig-dm-messages-container" id="igDmMessagesArea">
+                                <div style="text-align:center; margin-bottom:8px;">
+                                    <span style="font-size:0.65rem; color:#8E8E8E; background:#EEEEEE; padding:2px 8px; border-radius:10px;">TODAY 12:45 PM</span>
+                                </div>
+
+                                <!-- User simulated incoming comment trigger -->
+                                <div style="align-self:flex-end; background:#3797F0; color:white; padding:8px 12px; border-radius:18px; font-size:0.8rem; max-width:80%;">
+                                    PRICE please! Available in Medium?
+                                </div>
+
+                                <!-- Bot automated welcome message -->
+                                <div class="ig-bubble-in">
+                                    <div style="background:#EFEFEF; color:#262626; padding:10px 12px; border-radius:18px; font-size:0.8rem;" id="simulatedMsgText">
+                                        Hey {name}! Thanks for checking out our post on @sreee._.ram. Here are the details and exclusive link:
+                                    </div>
+
+                                    <!-- Product Card Attachment -->
+                                    <div class="ig-card-bubble">
+                                        <img src="https://instagram.fcjb5-2.fna.fbcdn.net/v/t51.82787-15/625353792_18109568698678282_8862091652716458602_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=isiwkIG1UD0Q7kNvwG9xqXq&_nc_oc=AdqbZdMA0KB4Me3Ad7ZctTY6qHlTc4CSU5OZKPE1aA10WaOo_MjumYj4y4CDHc3idl_5SDAGl5xmu76RhwGKeRSW&_nc_zt=23&_nc_ht=instagram.fcjb5-2.fna&edm=ANo9K5cEAAAA&_nc_gid=0tKJfokSn17KYfj5jgQT_g&_nc_tpa=Q5bMBQK0OQNU2LfHBtb4h4tBvAQr4Z-KMgI6e7q381WTN4NxBR4PriWs2HNco7QbCLQbWXiTj4HgnUiUlQ&oh=00_AQNubswwcvOUJLPJ7cssuwm_yVNlZ6ZvExi7LGE6uS9xYw&oe=6AD4FE64" alt="Product" class="ig-card-img" id="simulatedCardImg">
+                                        <div class="ig-card-content">
+                                            <div class="ig-card-title" id="simulatedCardTitle">@sreee._.ram Featured Item</div>
+                                            <div class="ig-card-text" id="simulatedCardSubtitle">Exclusive Instagram special. Tap below to order on WhatsApp with free delivery.</div>
+                                            <div class="ig-card-price" id="simulatedCardPrice">DM for Pricing</div>
+                                        </div>
+
+                                        <!-- Interactive Buttons inside the card -->
+                                        <div class="ig-interactive-buttons" id="simulatedButtonsContainer">
+                                            <!-- Interactive buttons synced dynamically -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Step 2 Line-Up Follow-Up Sequence Preview in iPhone Screen -->
+                                <div class="ig-followup-preview-wrapper" id="simulatedFollowupWrapper" style="margin-top:14px;">
+                                    <div style="text-align:center; margin-bottom:6px;">
+                                        <span style="font-size:0.62rem; color:#059669; background:#ECFDF5; border:1px solid #A7F3D0; padding:2px 8px; border-radius:10px; font-weight:700;" id="simulatedFollowupBadge">
+                                            SEQUENCE STEP 2 • AUTO FOLLOW-UP (+15 MINS)
+                                        </span>
+                                    </div>
+                                    <div class="ig-bubble-in" id="simulatedFollowupBubble">
+                                        <div style="background:#EFEFEF; color:#262626; padding:10px 12px; border-radius:18px; font-size:0.8rem; border-left:3px solid #10B981;" id="simulatedFollowupMsgText">
+                                            Still interested? Tap below to connect with us directly on WhatsApp:
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Instagram Dummy Footer Input -->
+                            <div class="ig-dm-footer">
+                                <span class="svg-icon" style="color:#262626;">
+                                    <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                                </span>
+                                <div class="ig-input-dummy">Message...</div>
+                                <span class="svg-icon" style="color:#262626;">
+                                    <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             TAB 4: UNIFIED OMNICHANNEL CRM & LEAD INBOX
+             ====================================================================== -->
+        <section class="tab-panel" id="tabCrm">
+            <div class="section-header-box" id="crmHeaderBox">
+                <div>
+                    <h1 class="section-title">Omnichannel Lead CRM &amp; Live Inbox</h1>
+                    <p class="section-desc">Manage comments, live DM negotiations, customer intent tags, and 1-click WhatsApp checkout handoffs.</p>
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <input type="text" class="form-input" placeholder="Search leads by handle or phone..." id="inputLeadSearch" style="width:260px;">
+                </div>
+            </div>
+
+            <!-- 3-Column CRM Grid -->
+            <div class="crm-inbox-grid" id="crmInboxGrid">
+                <!-- Col 1: Lead Selector List -->
+                <div class="inbox-list-col">
+                    <div class="inbox-search-box">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <span style="font-size:0.8rem; font-weight:700; color:#1E293B;">Active Conversations</span>
+                            <span class="activity-badge badge-blue" id="inboxCountBadge">0 Leads</span>
+                        </div>
+                        <div style="display:flex; gap:4px; overflow-x:auto;">
+                            <button type="button" class="activity-badge badge-blue" style="border:none; cursor:pointer;" id="filterAll">All</button>
+                            <button type="button" class="activity-badge" style="background:#F1F5F9; color:#475569; border:none; cursor:pointer;" id="filterHighIntent">High Intent</button>
+                            <button type="button" class="activity-badge" style="background:#F1F5F9; color:#475569; border:none; cursor:pointer;" id="filterWa">WhatsApp</button>
+                        </div>
+                    </div>
+                    <div class="lead-cards-list" id="leadCardsList">
+                        <!-- Leads rendered dynamically -->
+                    </div>
+                </div>
+
+                <!-- Col 2: Active Chat Transcript & Reply Bar -->
+                <div class="inbox-chat-col">
+                    <div class="chat-header" id="activeChatHeader">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCcgZmlsbD0nIzI1NjNFQic+PGNpcmNsZSBjeD0nMTInIGN5PSc4JyByPSc0Jy8+PHBhdGggZD0nTTQgMjBjMC00IDQtNiA4LTZzOCAyIDggNicvPjwvc3ZnPg==" alt="Avatar" class="activity-avatar" id="activeChatAvatar">
+                            <div>
+                                <div style="font-weight:700; font-size:0.9rem;" id="activeChatName">No Conversation Selected</div>
+                                <div style="font-size:0.75rem; color:#10B981;" id="activeChatStatus">Awaiting Inbound DM</div>
+                            </div>
+                        </div>
+                        <div style="display:flex; gap:8px;">
+                            <button type="button" class="btn-outline-blue" id="btnSendWaLinkNow" style="padding:6px 12px; font-size:0.75rem;">
+                                <span class="svg-icon">
+                                    <svg class="icon-xs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                </span>
+                                <span>Handoff to WhatsApp</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="chat-messages-area" id="activeChatMessagesArea">
+                        <!-- Chat messages injected dynamically -->
+                    </div>
+
+                    <div class="chat-input-bar">
+                        <button type="button" class="btn-secondary" id="btnQuickSnippet" style="padding:8px 12px;" title="Insert Canned Response">
+                            <span class="svg-icon">
+                                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                            </span>
+                            <span>Snippets</span>
+                        </button>
+                        <input type="text" class="form-input" placeholder="Type a manual reply to take over from bot..." id="inputManualReply">
+                        <button type="button" class="btn-primary" id="btnSendManualReply" style="padding:8px 18px;">Send</button>
+                    </div>
+                </div>
+
+                <!-- Col 3: Lead Profile & WhatsApp Generator -->
+                <div class="inbox-profile-col" id="inboxProfileCol">
+                    <div class="profile-avatar-center">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgdmlld0JveD0nMCAwIDY0IDY0Jz48Y2lyY2xlIGN4PSczMicgY3k9JzMyJyByPSczMicgZmlsbD0nIzI1NjNFQicvPjxwYXRoIGQ9J00yMCA0NGMwLTYuNjI3IDUuMzczLTEyIDEyLTEyczEyIDUuMzczIDEyIDEyaC0yNHonIGZpbGw9JyNmZmZmZmYnLz48Y2lyY2xlIGN4PSczMicgY3k9JzI0JyByPSc4JyBmaWxsPScjZmZmZmZmJy8+PC9zdmc+" alt="Lead" class="profile-avatar-lg" id="profileDetailAvatar">
+                        <div class="profile-name-lg" id="profileDetailName">No Lead Selected</div>
+                        <div class="profile-handle" id="profileDetailHandle">@username</div>
+                    </div>
+
+                    <div style="margin-bottom:14px;">
+                        <span class="form-label">Customer Tags:</span>
+                        <div style="display:flex; flex-wrap:wrap; gap:4px; margin-top:4px;" id="profileTagsRow">
+                            <span class="activity-badge badge-blue">High Intent</span>
+                            <span class="activity-badge badge-purple">Size-M</span>
+                            <span class="activity-badge badge-green">Ready to Buy</span>
+                        </div>
+                    </div>
+
+                    <div style="background:#FFFFFF; border:1px solid #E2E8F0; padding:12px; border-radius:8px; margin-bottom:14px;">
+                        <span style="font-size:0.75rem; font-weight:700; color:#475569;">Free WhatsApp Order Bridge:</span>
+                        <p style="font-size:0.75rem; color:#64748B; margin:4px 0 8px;">Direct link opens customer's WhatsApp with cart pre-filled:</p>
+                        <a href="#" target="_blank" class="btn-primary" id="btnDirectWaClick" style="width:100%; justify-content:center; background:#10B981; font-size:0.8rem; padding:8px;">
+                            <span class="svg-icon">
+                                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            </span>
+                            <span>Open in WhatsApp</span>
+                        </a>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="form-label">Internal Private Staff Notes:</span>
+                        <textarea class="form-textarea" rows="3" placeholder="Add notes about size, color preference..." id="txtLeadNotes"></textarea>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             TAB 5: PRODUCT CATALOG & REEL LINKER
+             ====================================================================== -->
+        <section class="tab-panel" id="tabCatalog">
+            <div class="section-header-box" id="catalogHeaderBox">
+                <div>
+                    <h1 class="section-title">Product Catalog &amp; Reel Linker</h1>
+                    <p class="section-desc">Manage products, attach them to specific Instagram Reels, and set exclusive DM promo prices.</p>
+                </div>
+                <button type="button" class="btn-primary" id="btnOpenNewProductModal">
+                    <span class="svg-icon">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    </span>
+                    <span>Add New Product</span>
+                </button>
+            </div>
+
+            <div class="catalog-grid" id="productCatalogGrid">
+                <!-- Product cards rendered dynamically -->
+            </div>
+        </section>
+
+        <!-- ======================================================================
+             TAB 6: SETTINGS & WEBHOOKS
+             ====================================================================== -->
+        <section class="tab-panel" id="tabSettings">
+            <div class="section-header-box" id="settingsHeaderBox">
+                <div>
+                    <h1 class="section-title">Integration &amp; Security Settings</h1>
+                    <p class="section-desc">Configure Meta Webhooks, WhatsApp direct phone links, and anti-spam account safety throttles.</p>
+                </div>
+                <button type="button" class="btn-primary" id="btnSaveSettings">
+                    <span class="svg-icon">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                    </span>
+                    <span>Save Configuration</span>
+                </button>
+            </div>
+
+            <div class="settings-grid" id="settingsGrid">
+                <!-- Instagram Graph API Credentials (@sreee._.ram) -->
+                <div class="content-card" id="cardWebhookConfig">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+                        <h3 class="card-title">Instagram Graph API Connection</h3>
+                        <span class="activity-badge badge-green" id="badgeTokenStatus">Verified Active</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Connected Account:</label>
+                        <div style="display:flex; align-items:center; gap:8px; background:#F8FAFC; padding:8px 12px; border-radius:8px; border:1px solid #E2E8F0;">
+                            <span class="pulse-dot"></span>
+                            <span style="font-weight:700; color:#1E293B;">@sreee._.ram</span>
+                            <span class="activity-badge badge-blue" style="font-size:0.68rem; margin:0;">Media Creator</span>
+                            <span style="font-size:0.75rem; color:#64748B; margin-left:auto;">ID: 29376245131980007</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Instagram Graph API Access Token:</label>
+                        <input type="text" class="form-input" id="inputInstagramToken" value="IGAAdVWvCE...sTUFHNAZDZD" readonly style="font-family:monospace; font-size:0.78rem; background:#F1F5F9; color:#475569;">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Webhook Topics Subscribed:</label>
+                        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                            <span class="trigger-tag">#instagram_comments</span>
+                            <span class="trigger-tag">#messages</span>
+                            <span class="trigger-tag">#messaging_postbacks</span>
+                            <span class="trigger-tag">#mentions</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="background:#EFF6FF; border:1px solid #BFDBFE; padding:12px; border-radius:8px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                            <label class="form-label" style="color:#1E40AF; margin:0; font-weight:700;">Live Public Webhook URL (For Meta Developer Portal):</label>
+                            <button type="button" class="btn-outline-blue" id="btnCopyWebhookUrl" style="padding:2px 8px; font-size:0.7rem;">Copy URL</button>
+                        </div>
+                        <input type="text" class="form-input" id="inputWebhookPublicUrl" value="https://petroleum-such-benz-graduated.trycloudflare.com/webhook" readonly style="font-family:monospace; font-size:0.8rem; background:#FFFFFF; color:#1E40AF; font-weight:600;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+                            <span style="font-size:0.75rem; color:#1E40AF;">Verify Token: <code style="background:#DBEAFE; padding:2px 6px; border-radius:4px; font-weight:700;">instaflow_secret_2026</code></span>
+                            <button type="button" class="btn-outline-blue" id="btnCopyVerifyToken" style="padding:2px 8px; font-size:0.7rem;">Copy Token</button>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:12px;">
+                        <label class="form-label">Live Gateway Event Inspector:</label>
+                        <div class="webhook-log-box" id="webhookLogTerminal">
+[SYSTEM] InstaFlow Webhook & Polling Automation Server active.
+[TUNNEL] Public HTTPS: https://petroleum-such-benz-graduated.trycloudflare.com
+[META-GRAPH] Access Token verified: @sreee._.ram.
+[STATUS] Webhook handshake verified (HTTP 200 OK). Listening for live comments!
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button type="button" class="btn-secondary" id="btnTestWebhookDispatch" style="flex:1; justify-content:center;">
+                            <span class="svg-icon">
+                                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </span>
+                            <span>Simulate Comment</span>
+                        </button>
+                        <button type="button" class="btn-primary" id="btnLiveTestInstagramReply" style="flex:1; justify-content:center; background:#10B981;">
+                            <span class="svg-icon">
+                                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </span>
+                            <span>Post Live Test on IG</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- WhatsApp Direct Bridge (100% Free - Zero API Fees) -->
+                <div class="content-card" id="cardWhatsappSafety">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+                        <h3 class="card-title">WhatsApp Sales Bridge</h3>
+                        <span class="activity-badge badge-green">100% Free Mode ($0.00 Meta Fees)</span>
+                    </div>
+
+                    <p class="section-desc" style="margin-bottom:12px;">
+                        Instead of paying Meta Cloud API fees per template, InstaFlow generates free click-to-chat deep links (<code style="background:#F1F5F9; padding:2px 6px; border-radius:4px; color:#2563EB;">https://wa.me/phone?text=...</code>) inside your automated Instagram DMs.
+                    </p>
+
+                    <div class="form-group">
+                        <label class="form-label">Your Store WhatsApp Phone (Include country code, no + or spaces):</label>
+                        <input type="text" class="form-input" id="inputBusinessWaPhone" value="919876543210" placeholder="e.g. 919876543210">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Default Order Pre-filled Message Template:</label>
+                        <textarea class="form-textarea" rows="2" id="inputBusinessWaTemplate">Hi! I want to order the {product} (Reel #{reel_id}) with my 15% DM discount. My size is Medium.</textarea>
+                    </div>
+
+                    <button type="button" class="btn-outline-blue" id="btnTestWaMeLink" style="width:100%; justify-content:center; margin-bottom:16px;">
+                        <span class="svg-icon">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </span>
+                        <span>Test Pre-filled WhatsApp Link in Browser</span>
+                    </button>
+
+                    <h3 class="card-title" style="margin:20px 0 12px;">Meta Anti-Spam Safety Guard</h3>
+                    <div class="form-group">
+                        <label class="form-label">Max Auto-DMs per hour (Account Health Protection):</label>
+                        <input type="number" class="form-input" value="120" min="20" max="500">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Duplicate Comment Cooldown:</label>
+                        <select class="form-select">
+                            <option value="24">1 DM per user every 24 hours</option>
+                            <option value="12">1 DM per user every 12 hours</option>
+                            <option value="always">Always respond to every comment</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================================================
+         MODALS (ADD REEL AUTOMATION)
+         ========================================================================== -->
+    <div class="modal-overlay" id="modalAddReel">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Connect Instagram Reel Trigger</h3>
+                <button type="button" class="modal-close-btn" id="btnCloseReelModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Reel Title / Product Name:</label>
+                    <input type="text" class="form-input" id="newReelTitle" placeholder="e.g. Featured Product Reel">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Trigger Keyword(s) (Comma separated):</label>
+                    <input type="text" class="form-input" id="newReelKeywords" value="PRICE, BUY, LINK, ORDER">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Randomized Public Comment Reply:</label>
+                    <input type="text" class="form-input" id="newReelPublicReply" value="Check your DM! Details sent directly.">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Thumbnail Image URL:</label>
+                    <input type="text" class="form-input" id="newReelThumb" value="https://instagram.fcjb5-2.fna.fbcdn.net/v/t51.82787-15/625353792_18109568698678282_8862091652716458602_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&_nc_map=urlgen_bucketless&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=isiwkIG1UD0Q7kNvwG9xqXq&_nc_oc=AdqbZdMA0KB4Me3Ad7ZctTY6qHlTc4CSU5OZKPE1aA10WaOo_MjumYj4y4CDHc3idl_5SDAGl5xmu76RhwGKeRSW&_nc_zt=23&_nc_ht=instagram.fcjb5-2.fna&edm=ANo9K5cEAAAA&_nc_gid=0tKJfokSn17KYfj5jgQT_g&_nc_tpa=Q5bMBQK0OQNU2LfHBtb4h4tBvAQr4Z-KMgI6e7q381WTN4NxBR4PriWs2HNco7QbCLQbWXiTj4HgnUiUlQ&oh=00_AQNubswwcvOUJLPJ7cssuwm_yVNlZ6ZvExi7LGE6uS9xYw&oe=6AD4FE64">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="btnCancelReelModal">Cancel</button>
+                <button type="button" class="btn-primary" id="btnSubmitNewReel">Save &amp; Activate Reel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Configure Automations for Specific Reel -->
+    <div class="modal-overlay" id="modalReelConfig">
+        <div class="modal-content" style="max-width:580px;">
+            <div class="modal-header">
+                <div>
+                    <h3 class="modal-title" id="modalConfigReelTitle">Reel Automations Manager</h3>
+                    <div style="font-size:0.75rem; color:#64748B;" id="modalConfigReelSubtitle">Configure triggers and responses for this specific reel</div>
+                </div>
+                <button type="button" class="modal-close-btn" id="btnCloseReelConfigModal">&times;</button>
+            </div>
+            <div class="modal-body drawer-config-panel">
+                <div style="display:flex; align-items:center; justify-content:space-between; background:#F8FAFC; padding:12px; border-radius:8px; border:1px solid #E2E8F0;">
+                    <div>
+                        <div style="font-weight:700; font-size:0.85rem;">Automation Status:</div>
+                        <div style="font-size:0.75rem; color:#64748B;">Turn on/off automated comment scanning for this reel</div>
+                    </div>
+                    <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+                        <input type="checkbox" id="toggleReelActiveState" checked style="accent-color:#2563EB; width:18px; height:18px;">
+                        <span style="font-size:0.82rem; font-weight:700; color:#2563EB;" id="lblReelActiveState">Active</span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Trigger Keywords for this Reel (Multiple Keywords):</label>
+                    <div class="keyword-pills-editor" id="modalKeywordsPills">
+                        <!-- Injected dynamically -->
+                    </div>
+                    <div style="display:flex; gap:6px; margin-top:6px;">
+                        <input type="text" class="form-input" id="inputModalNewKeyword" placeholder="Add keyword (e.g. SIZE, DISCOUNT, LINK)..." style="padding:6px 10px; font-size:0.8rem;">
+                        <button type="button" class="btn-outline-blue" id="btnModalAddKeyword" style="padding:6px 12px; white-space:nowrap; font-size:0.78rem;">+ Add</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+                        <label class="form-label" style="margin:0;">Chat Flow Rules for this Reel:</label>
+                        <button type="button" class="btn-outline-blue" id="btnModalAddNewFlow" style="padding:3px 8px; font-size:0.72rem;">+ New Flow Rule</button>
+                    </div>
+                    <div id="modalReelFlowsList" style="display:flex; flex-direction:column; gap:8px;">
+                        <!-- Injected dynamically: Flow rules with their keyword pills and [Edit Flow] button -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Randomized Public Comment Auto-Replies (Anti-Spam Rotation):</label>
+                    <textarea class="form-textarea" id="modalReelPublicReplies" rows="3" placeholder="One reply variation per line...">Check your DM! Secret 15% link sent.
+Sent details to your inbox! Check DMs for sizing chart.
+DM sent! Tap the link inside to order directly.</textarea>
+                    <small class="hud-hint-dim" style="color:#64748B;">Rotating replies keeps your Instagram account completely safe from Meta spam detection.</small>
+                </div>
+
+                <div style="background:#EFF6FF; border:1px solid #BFDBFE; padding:12px; border-radius:8px; display:flex; align-items:center; justify-content:space-between;">
+                    <div>
+                        <div style="font-size:0.82rem; font-weight:700; color:#1E40AF;">Private DM Flow &amp; Line-Up Sequence:</div>
+                        <div style="font-size:0.75rem; color:#3B82F6;">Customize message copy, product card, and interactive buttons for this reel</div>
+                    </div>
+                    <button type="button" class="btn-primary" id="btnModalJumpToFlowBuilder" style="padding:6px 12px; font-size:0.75rem; white-space:nowrap;">
+                        <span>Customize Flow</span>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="btnCancelReelConfig">Close</button>
+                <button type="button" class="btn-primary" id="btnSaveReelConfig">Save Reel Rules</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast-notice" id="appToast">
+        <span class="svg-icon" id="toastIcon">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        </span>
+    </div>
+
+    <!-- Application Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
